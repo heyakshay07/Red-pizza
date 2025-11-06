@@ -5,76 +5,81 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import coup1 from "../assets/coupens/coup1.jpg";
 import coup2 from "../assets/coupens/coup2.jpg";
 import coup3 from "../assets/coupens/coup3.jpg";
+import coup4 from "../assets/coupens/coup4.jpg";
+import coup5 from "../assets/coupens/coup5.jpg";
 
 const Coupens = () => {
-  const sliderImages = [coup1, coup2, coup3];
-
-  const [current, setCurrent] = useState(0);
-
-  const nextSlide = () => {
-    setCurrent((prev) =>
-      prev === sliderImages.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) =>
-      prev === 0 ? sliderImages.length - 1 : prev - 1
-    );
-  };
+  const cards = [
+    {
+      id: 1,
+      title: "Margherita Pizza",
+      price: "₹299",
+      discount: "20% OFF",
+      img: "https://images.unsplash.com/photo-1601924582971-d6617b59f5c3?q=80&w=800",
+    },
+    {
+      id: 2,
+      title: "Farmhouse Pizza",
+      price: "₹399",
+      discount: "15% OFF",
+      img: "https://images.unsplash.com/photo-1548365328-5a1f91d79c57?q=80&w=800",
+    },
+    {
+      id: 3,
+      title: "Cheese Burst Pizza",
+      price: "₹449",
+      discount: "25% OFF",
+      img: "https://images.unsplash.com/photo-1604382354936-07c7e98b8e2f?q=80&w=800",
+    },
+    {
+      id: 4,
+      title: "Spicy Paneer Pizza",
+      price: "₹349",
+      discount: "10% OFF",
+      img: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=800",
+    }
+  ];
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto mt-10">
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <h2 className="text-3xl font-bold mb-8 text-center">Popular Pizzas</h2>
 
-      {/* ✅ Slider Container */}
-      <div className="overflow-hidden rounded-xl">
-        <div
-          className="flex transition-transform duration-700 ease-in-out"
-          style={{
-            transform: `translateX(-${current * 100}%)`,
-          }}
-        >
-          {sliderImages.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt="coupon banner"
-              className="w-full h-64 md:h-72 lg:h-80 object-cover flex-shrink-0"
-            />
-          ))}
-        </div>
-      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-      {/* ✅ Left Arrow */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg hover:bg-gray-100 p-2 rounded-full"
-      >
-        <ChevronLeft size={24} className="text-red-600" />
-      </button>
-
-      {/* ✅ Right Arrow */}
-      <button
-        onClick={nextSlide}
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 p-2 rounded-full shadow-lg"
-      >
-        <ChevronRight size={24} className="text-white" />
-      </button>
-
-      {/* ✅ Pagination Dots */}
-      <div className="flex justify-center mt-4 space-x-3">
-        {sliderImages.map((_, index) => (
+        {cards.map((card) => (
           <div
-            key={index}
-            onClick={() => setCurrent(index)}
-            className={`w-3 h-3 rounded-full cursor-pointer transition-all ${
-              current === index ? "bg-red-600" : "bg-gray-400"
-            }`}
-          ></div>
+            key={card.id}
+            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
+          >
+            {/* Image */}
+            <img
+              src={card.img}
+              alt={card.title}
+              className="w-full h-48 object-cover"
+            />
+
+            {/* Content */}
+            <div className="p-5">
+              <h3 className="text-lg font-semibold">{card.title}</h3>
+
+              {/* Price & Discount */}
+              <div className="flex justify-between items-center mt-2">
+                <span className="text-xl font-bold text-red-600">{card.price}</span>
+                <span className="text-sm text-green-600 font-semibold bg-green-100 px-2 py-1 rounded">
+                  {card.discount}
+                </span>
+              </div>
+
+              {/* Button */}
+              <button className="mt-5 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-semibold transition">
+                Order Now
+              </button>
+            </div>
+          </div>
         ))}
+
       </div>
     </div>
   );
 };
-
 export default Coupens;
