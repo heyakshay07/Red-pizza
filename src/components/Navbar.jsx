@@ -1,163 +1,154 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // ✅ Import your assets
 import pizza1 from "../assets/navbar/pizza1.jpg";
 import pizza2 from "../assets/navbar/pizza2.jpg";
 import pizza3 from "../assets/navbar/pizza3.jpg";
+import logo from "../assets/navbar/logo.jpg";
 
 const Navbar = () => {
-  // ✅ State
-  const [isLoading, setIsLoading] = useState(true);
-  const [activeStory, setActiveStory] = useState("Digital Modeling");
-  const [animatingLine, setAnimatingLine] = useState(null);
+  // ✅ Slides Array WITH CUSTOM TEXT
+  const slides = [
+    {
+      id: 1,
+      title: "50% OFF Above ₹1000",
+      category: "LIMITED TIME OFFER",
+      image: pizza1,
+    },
+    {
+      id: 2,
+      title: "30% OFF On All Pizzas",
+      category: "SPECIAL DISCOUNT",
+      image: pizza2,
+    },
+    {
+      id: 3,
+      title: "New Arrivals",
+      category: "TRY OUR LATEST MENU",
+      image: pizza3,
+    },
+  ];
 
-  // ✅ Stories data
-  const stories = {
-    "Water Infrastructure": {
-      category: "WATER AND WASTEWATER",
-      title: "Critical Upgrades to Aging Water Infrastructure",
-      backgroundImage: pizza1,
-    },
-    "Digital Modeling": {
-      category: "HOSPITALITY",
-      title: "2025 Trends in Hospitality Construction",
-      backgroundImage: pizza2,
-    },
-    "Supporting Lahaina": {
-      category: "DATA DRIVEN",
-      title: "Evolution of Model Data-Driven Planning",
-      backgroundImage: pizza3,
-    },
+  const [current, setCurrent] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+
+  // ✅ Auto slide every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      slideNext();
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [current]);
+
+  const slideNext = () => {
+    setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
-  const storyKeys = Object.keys(stories);
-  const currentStory = stories[activeStory];
-
-  // ✅ Story click handler
-  const handleStoryClick = (story) => {
-    if (story !== activeStory) {
-      setAnimatingLine(story);
-      setTimeout(() => {
-        setActiveStory(story);
-        setAnimatingLine(null);
-      }, 800);
-    }
-  };
+  // ✅ Navbar scroll change
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-  <section className="transparent relative -z-50 left-0 -top-24 ">
-        {/* Loading Overlay */}
-        {isLoading && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
-            <div className="relative">
-              <img
-                src="https://www.pcl.com/etc.clientlibs/settings/wcm/designs/pcl-marketing/clientlib-all/resources/patterns/chevrons/homepage-hero/hero-banner-loader.gif?id=pcl-homepage-hero-4fc08ba0-7480-11f0-b48a-6bf3f1006c52"
-                alt="Loading..."
-                className="w-full md:h-full object-contain"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                  setIsLoading(false);
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-32 w-32 md:h-48 md:w-48 border-t-2 border-b-2 border-yellow-400 opacity-50"></div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Background container */}
-        <div className="relative min-h-screen max-w-screen overflow-hidden">
-          {/* If video */}
-          {currentStory.backgroundImage.endsWith(".mp4") ? (
-            <>
-              <video
-                className="absolute top-0 left-0 w-full h-full object-cover"
-                src={currentStory.backgroundImage}
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-              {/* Gradient overlay on top of video */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/40"></div>
-            </>
-          ) : (
-            <div></div>
-            // If image
-            // <div
-            //   className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
-            //   style={{
-            //     backgroundImage: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${currentStory.backgroundImage}),
-            //   }}
-            // ></div>
-          )}
-
-          {/* Foreground content */}
-          <div className="relative z-10 flex flex-col justify-center min-h-screen px-4 md:px-8 lg:px-16">
-            <div className="max-w-4xl">
-              <div className="mb-4 md:mb-6">
-                {/* <span className="text-xs md:text-sm font-semibold text-white uppercase tracking-wider opacity-90">
-                  {currentStory.category}
-                </span> */}
-              </div>
-
-              {/* <h1 className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight mb-8 md:mb-12 lg:mb-16 text-left max-w-xl">
-                {currentStory.title}
-              </h1> */}
-
-              <div className="mb-16 md:mb-20 lg:mb-24">
-                <button className="group inline-flex items-center text-white font-semibold text-sm md:text-base uppercase tracking-wide hover:text-yellow-400 transition-colors duration-300">
-                  <span>Read the Story</span>
-                  <div className="ml-4 w-12 md:w-16 h-px bg-white group-hover:bg-yellow-400 transition-colors duration-300"></div>
-                </button>
-              </div>
-            </div>
+    <section className="relative w-full overflow-hidden h-screen">
+      {/* ✅ NAVBAR */}
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 
+          ${scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}`}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-12 w-auto object-contain cursor-pointer"
+            />
           </div>
 
-          {/* Bottom nav / line animation stays same as your code */}
-          <div className="absolute bottom-8 md:bottom-12 lg:bottom-16 left-4 md:left-8 lg:left-16 right-4 md:right-8 lg:right-16">
-            <div className="flex flex-wrap justify-between items-center">
-              <div className="flex flex-wrap gap-6 md:gap-8 lg:gap-12 mb-4 md:mb-0">
-                {storyKeys.map((story) => (
-                  <button
-                    key={story}
-                    onClick={() => handleStoryClick(story)}
-                    className={`relative text-sm md:text-base font-semibold transition-all duration-300 pb-1 border-b-2 overflow-hidden ${
-                      activeStory === story
-                        ? "text-white border-yellow-400"
-                        : "text-gray-300 border-transparent hover:text-white hover:border-gray-500"
-                    }`}
-                  >
-                    {story}
-                    {/* Animated line */}
-                    <div
-                      className={`absolute bottom-0 left-0 h-0.5 bg-yellow-400 transition-all duration-800 ease-in-out ${
-                        animatingLine === story
-                          ? "w-full"
-                          : activeStory === story
-                          ? "w-full"
-                          : "w-0"
-                      }`}
-                    ></div>
-                  </button>
-                ))}
-              </div>
+          <div className="hidden md:flex space-x-8 text-white font-semibold text-sm tracking-wide">
+            <a href="#" className="hover:text-yellow-400 transition">
+              Home
+            </a>
+            <a href="#" className="hover:text-yellow-400 transition">
+              About Us
+            </a>
+            <a href="#" className="hover:text-yellow-400 transition">
+              Menu
+            </a>
+            <a href="#" className="hover:text-yellow-400 transition">
+              Blog
+            </a>
+            <a href="#" className="hover:text-yellow-400 transition">
+              Contact Us
+            </a>
+            <a href="#" className="hover:text-yellow-400 transition">
+              New Arrival
+            </a>
 
-              <div className="flex items-center justify-center">
-                <button className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-yellow-400 bg-transparent flex items-center justify-center hover:bg-yellow-400 hover:text-black transition-all duration-300 group">
-                  <div className="flex space-x-0.5">
-                    <div className="w-0.5 h-4 bg-current group-hover:bg-black"></div>
-                    <div className="w-0.5 h-4 bg-current group-hover:bg-black"></div>
-                  </div>
-                </button>
-              </div>
-            </div>
+            <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
+              Order Now
+            </button>
           </div>
 
-          <div className="h-20 md:h-0"></div>
+          <button className="md:hidden text-white text-xl">☰</button>
         </div>
-      </section>
+      </nav>
+
+      {/* ✅ SLIDER */}
+      <div
+        className="flex h-full transition-transform duration-[1000ms] ease-in-out"
+        style={{
+          transform: `translateX(-${current * 100}%)`,
+        }}
+      >
+        {slides.map((slide) => (
+          <div
+            key={slide.id}
+            className="w-full flex-shrink-0 h-screen relative"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(${slide.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* ✅ Offer Content */}
+            <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 z-10">
+              {/* Category Text */}
+              <span className="text-yellow-400 text-sm uppercase tracking-widest mb-3">
+                {slide.category}
+              </span>
+
+              {/* Big Offer or Title */}
+              <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold max-w-xl leading-tight mb-8 drop-shadow-lg">
+                {slide.title}
+              </h1>
+
+              {/* Button */}
+              <button className="group inline-flex items-center text-white font-semibold text-sm md:text-base uppercase tracking-wide hover:text-yellow-400 transition">
+                <span>Order Now</span>
+                <div className="ml-4 w-12 h-px bg-white group-hover:bg-yellow-400"></div>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ✅ Bottom Indicators */}
+      <div className="absolute bottom-10 left-0 right-0 flex justify-center space-x-3 z-20">
+        {slides.map((_, index) => (
+          <div
+            key={index}
+            className={`w-3 h-3 rounded-full transition-all ${
+              current === index ? "bg-yellow-400" : "bg-white/40"
+            }`}
+          ></div>
+        ))}
+      </div>
+    </section>
   );
 };
 
