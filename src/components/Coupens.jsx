@@ -33,14 +33,14 @@ const Coupens = () => {
   };
 
   return (
-    <div className="relative max-w-7xl mx-auto px-4 py-12">
+    <div className="relative max-w-7xl mx-auto px-4 py-12 bg-[#f7f1e9] rounded-lg">
 
       <h2 className="text-3xl font-bold mb-8 text-center">Popular Pizzas</h2>
 
       {/* ✅ Card Slider Container */}
-      <div className="overflow-hidden">
+      <div className="overflow-hidden ">
         <div
-          className="flex transition-transform duration-500"
+          className="flex transition-transform duration-500 "
           style={{
             transform: `translateX(-${current * 25}%)`, // 25% because 4 cards = 100% / 4
           }}
