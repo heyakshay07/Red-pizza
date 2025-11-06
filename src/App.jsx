@@ -8,7 +8,9 @@ const App = () => {
   return (
     <div >
       <Navbar/>
-      <Coupens/>
+      <div className='w-full bg-[#f7f1e9]'>
+        <Coupens/>
+      </div>
       <Menu/>
       <Footer/>
     </div>
