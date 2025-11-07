@@ -43,7 +43,7 @@
 import React from 'react'
 import Navbar from './components/Navbar'
 import HeroSlider from './components/HeroSlider'
-import Coupens from './components/Coupens'
+import Popular from './components/Popular'
 import Footer from './components/Footer'
 import Menu from './components/Menu'
 import { Routes, Route } from 'react-router-dom'
@@ -56,6 +56,9 @@ import ContactUs from './pages/ContactUs'
 import NewArrival from './pages/NewArrival'
 import Order from './pages/Order'
 import Gallery from './pages/Gallery'
+import Coupens from './components/Coupons'
+import FloatingOrderButton from './components/FloatingOrderButton'
+
 
 
 const App = () => {
@@ -64,6 +67,7 @@ const App = () => {
 
       {/* ✅ Navbar ALWAYS VISIBLE */}
       <Navbar />
+       <FloatingOrderButton />
 
       {/* ✅ ROUTES */}
       <Routes>
@@ -72,7 +76,8 @@ const App = () => {
             <>
             <HeroSlider/>
               <div className='w-full bg-[#f7f1e9]'>
-                <Coupens />
+                <Coupens/>
+                <Popular />
               </div>
               <Menu />
             </>

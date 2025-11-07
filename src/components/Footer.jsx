@@ -9,13 +9,11 @@ const Footer = () => {
         <div className="md:w-1/3">
           <h2 className="text-xl font-bold mb-4">Contact Us</h2>
           <p>
-            U.S.Pizza office: <br />
-            1st floor MVR square, above quench liquor store, <br />
-            201 CMR road, HRBR layout, 560043, <br />
-            Bangalore, Karnataka.
+           
+            Shop No.04, Radiant Ivy, opposite to Brahma Exuberance, next to Eisha Loreals, Kausar Baugh, Kondhwa, Pune, Maharashtra 411048
           </p>
-          <p className="mt-2">+91-6360266160</p>
-          <p>franchise@uspizza.in</p>
+          <p className="mt-2">+91-93224 33843</p>
+          {/* <p>franchise@uspizza.in</p> */}
         </div>
 
         {/* Stay Connected */}
@@ -39,7 +37,7 @@ const Footer = () => {
       </div>
 
       {/* Navigation Links */}
-      <div className="container mx-auto px-4 mt-10 border-t border-gray-700 pt-4 flex flex-wrap justify-center gap-4 text-orange-500 font-semibold text-sm">
+      {/* <div className="container mx-auto px-4 mt-10 border-t border-gray-700 pt-4 flex flex-wrap justify-center gap-4 text-orange-500 font-semibold text-sm">
         {[
           "HOME",
           "ABOUT US",
@@ -55,11 +53,11 @@ const Footer = () => {
             {item}
           </span>
         ))}
-      </div>
+      </div> */}
 
       {/* Copyright */}
       <div className="container mx-auto px-4 mt-4 text-center text-white text-sm">
-        Copyright © 2024 US Pizza All Rights Reserved. Designed By Samtech Innovations.
+        Copyright © 2025 Red-Pizza All Rights Reserved. Designed By Whizfortune.
       </div>
     </footer>
   );
