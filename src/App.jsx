@@ -58,6 +58,7 @@ import Order from './pages/Order'
 import Gallery from './pages/Gallery'
 import Coupens from './components/Coupons'
 import FloatingOrderButton from './components/FloatingOrderButton'
+import Ourstory from './components/Ourstory'
 
 
 
@@ -93,7 +94,7 @@ const App = () => {
         <Route path="/newarrival" element={<NewArrival />} />
         <Route path="/order" element={<Order />} />
       </Routes>
-
+      <Ourstory/>
       {/* ✅ Footer ALWAYS VISIBLE */}
       <Footer />
 
