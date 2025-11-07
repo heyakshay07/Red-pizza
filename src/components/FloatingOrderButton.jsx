@@ -3,7 +3,7 @@ import React from "react";
 const FloatingOrderButton = () => {
   return (
     <a
-      href="#order" // Change this to your actual order link
+      href="/order" // Change this to your actual order link
       className="fixed bottom-6 right-6 z-50 animate-pulse"
     >
       <button className="bg-red-600 text-white font-semibold px-6 py-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-red-700 transition-all border-3 border-dashed border-white">

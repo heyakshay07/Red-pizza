@@ -60,6 +60,17 @@ import Coupens from './components/Coupons'
 import FloatingOrderButton from './components/FloatingOrderButton'
 
 
+import Quickies from './pages/Menu/Quickies'
+import Bruschetta from './pages/Menu/Bruschetta'
+import Pizza from './pages/Menu/Pizza'
+import Burger from './pages/Menu/Burger'
+import Pasta from './pages/Menu/Pasta'
+import Salad from './pages/Menu/Salad'
+import Beverages from './pages/Menu/Beverages'
+import Dessert from './pages/Menu/Dessert'
+import ComboOffer from './pages/Menu/ComboOffer'
+
+
 
 const App = () => {
   return (
@@ -78,8 +89,8 @@ const App = () => {
               <div className='w-full bg-[#f7f1e9]'>
                 <Coupens/>
                 <Popular />
-              </div>
               <Menu />
+              </div>
             </>
           } 
         />
@@ -92,6 +103,18 @@ const App = () => {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/newarrival" element={<NewArrival />} />
         <Route path="/order" element={<Order />} />
+
+        {/*Menu*/}
+        <Route path='/pages/menu/quickies' element={<Quickies/>}/>
+        <Route path='/pages/menu/bruschetta' element={<Bruschetta/>}/>
+        <Route path='/pages/menu/pizza' element={<Pizza/>}/>
+        <Route path='/pages/menu/burgers' element={<Burger/>}/>
+        <Route path='/pages/menu/pasta' element={<Pasta/>}/>
+        <Route path='/pages/menu/salad' element={<Salad/>}/>
+        <Route path='/pages/menu/beverages' element={<Beverages/>}/>
+        <Route path='/pages/menu/dessert' element={<Dessert/>}/>
+        <Route path='/pages/menu/combo-offer' element={<ComboOffer/>}/>
+
       </Routes>
 
       {/* ✅ Footer ALWAYS VISIBLE */}
