@@ -58,6 +58,7 @@ import Order from './pages/Order'
 import Gallery from './pages/Gallery'
 import Coupens from './components/Coupons'
 import FloatingOrderButton from './components/FloatingOrderButton'
+import Ourstory from './components/Ourstory'
 
 
 import Quickies from './pages/Menu/Quickies'
@@ -116,7 +117,7 @@ const App = () => {
         <Route path='/pages/menu/combo-offer' element={<ComboOffer/>}/>
 
       </Routes>
-
+      <Ourstory/>
       {/* ✅ Footer ALWAYS VISIBLE */}
       <Footer />
 
