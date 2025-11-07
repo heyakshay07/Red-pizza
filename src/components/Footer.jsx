@@ -27,7 +27,6 @@ const Footer = () => {
             <FaInstagram className="hover:text-orange-400 cursor-pointer" />
             <FaTwitter className="hover:text-orange-400 cursor-pointer" />
             <FaYoutube className="hover:text-orange-400 cursor-pointer" />
-            {/* <span className="text-2xl cursor-pointer">🐤</span> */}
           </div>
         </div>
 
