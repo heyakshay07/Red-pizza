@@ -2,8 +2,8 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div className='text-center text-2xl'>
-      home Page
+    <div>
+      <h1 className='text-4xl font-bold text-center my-10'>Home page</h1>
     </div>
   )
 }
