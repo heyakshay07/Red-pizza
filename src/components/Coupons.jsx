@@ -48,7 +48,7 @@ const Coupens = () => {
   const translateX = -(index * containerWidth);
 
   return (
-    <section className="relative w-full px-4 py-6">
+    <section className="relative max-w-7xl mx-auto px-4 py-12 bg-[#f7f1e9] rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Coupons & Offers</h2>
 
       <div className="relative">

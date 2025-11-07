@@ -37,9 +37,9 @@ const FoodGrid = () => {
             <img
               src={item.image}
               alt={item.title}
-              className="w-full  h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
             />
-            <div className="absolute inset-0  bg-opacity-40 flex flex-col items-center justify-center text-white font-bold text-center p-4 ">
+            <div className="absolute inset-0 m-6 border-2 border-white bg-opacity-40 flex flex-col items-center justify-center text-white font-bold text-center p-4 ">
               <h2 className="text-xl md:text-2xl">{item.title}</h2>
               <button className="mt-2 px-4 py-2 border-2 border-white rounded hover:bg-white hover:text-black transition">
                 {item.button}
