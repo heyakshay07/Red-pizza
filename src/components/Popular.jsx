@@ -7,7 +7,7 @@ import coup3 from "../assets/coupens/coup3.jpg";
 import coup4 from "../assets/coupens/coup4.jpg";
 import coup5 from "../assets/coupens/coup5.jpg";
 
-const Coupens = () => {
+const Popular = () => {
   const cards = [
     { id: 1, title: "Margherita Pizza", price: "₹299", discount: "20% OFF", img: coup1 },
     { id: 2, title: "Farmhouse Pizza", price: "₹399", discount: "15% OFF", img: coup2 },
@@ -102,4 +102,4 @@ const Coupens = () => {
   );
 };
 
-export default Coupens;
+export default Popular;
