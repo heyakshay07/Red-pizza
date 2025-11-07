@@ -70,13 +70,13 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex space-x-8 text-white font-semibold text-sm tracking-wide">
-            <a href="#" className="hover:text-yellow-400 transition">
+            <a href="/" className="hover:text-yellow-400 transition">
               Home
             </a>
             <a href="#" className="hover:text-yellow-400 transition">
               About Us
             </a>
-            <a href="#" className="hover:text-yellow-400 transition">
+            <a href="/Menu" className="hover:text-yellow-400 transition">
               Menu
             </a>
             <a href="#" className="hover:text-yellow-400 transition">
