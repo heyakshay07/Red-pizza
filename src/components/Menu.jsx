@@ -1,7 +1,6 @@
 // FoodGrid.jsx
 import React from "react";
 
-// Images import (replace with your actual images)
 import box1 from "../assets/img/box1.png";
 import box22 from "../assets/img/box22.png";
 import box2 from "../assets/img/box2.png";
@@ -39,7 +38,7 @@ const FoodGrid = () => {
               alt={item.title}
               className="w-full  h-64 object-cover transition-transform duration-300 group-hover:scale-110"
             />
-            <div className="absolute inset-0  bg-opacity-40 flex flex-col items-center justify-center text-white font-bold text-center p-4 ">
+            <div className="absolute inset-0 border-white m-4 border-2 bg-opacity-40 flex flex-col items-center justify-center text-white font-bold text-center p-4 ">
               <h2 className="text-xl md:text-2xl">{item.title}</h2>
               <button className="mt-2 px-4 py-2 border-2 border-white rounded hover:bg-white hover:text-black transition">
                 {item.button}
@@ -53,3 +52,8 @@ const FoodGrid = () => {
 };
 
 export default FoodGrid;
+
+
+
+
+
