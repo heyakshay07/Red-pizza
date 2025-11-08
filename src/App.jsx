@@ -91,7 +91,7 @@ const App = () => {
                 <Coupens/>
                 <Popular />
               <Menu />
-                <Ourstory/>
+                 <Ourstory/>
               </div>
             </>
           } 
@@ -118,7 +118,7 @@ const App = () => {
         <Route path='/pages/menu/combo-offer' element={<ComboOffer/>}/>
 
       </Routes>
-    
+   
       {/* ✅ Footer ALWAYS VISIBLE */}
       <Footer />
 
