@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import vegIcon from "../../assets/quickies/veg.png";
 import nonVegIcon from "../../assets/quickies/NV.png";
 
-import veg from "../../assets/pizza/vegPizza.jpeg";
+import veg1 from "../../assets/pizza/V1.png";
+import veg2 from "../../assets/pizza/v2.png"
+import veg3 from "../../assets/pizza/v3.png"
+import veg4 from "../../assets/pizza/v4.png"
+import veg5 from "../../assets/pizza/v5.png"
+import veg from "../../assets/pizza/vegPizza.jpeg"
 import nonvegPizza from "../../assets/pizza/nonvegPizza.jpeg";
 import jain from "../../assets/pizza/jain.jpeg";
 
@@ -16,11 +21,11 @@ const pizzaImages = {
 // ✅ Pizza Data (grouped by version)
 const pizzaCategories = {
   "Veg V1": [
-    { name: "Margherita", desc: "Fresh mozzarella with basil", price: 139, type: "veg" },
-    { name: "Simple Veg", desc: "Onion & Tomato", price: 139, type: "veg" },
-    { name: "Garlic Pizza", desc: "Garlic & Cheese", price: 139, type: "veg" },
-    { name: "Veggie Crunch", desc: "Diced onion, Bell pappers & Fresh Mozzarella", price: 139, type: "veg" },
-    { name: "Corn Treat", desc: "Fresh Mozzarella Cheese & Juicy Golden Corn Kernels", price: 139, type: "veg" },
+    { name: "Margherita", desc: "Fresh mozzarella with basil", price: 139, type: "veg",img :  veg1  },
+    { name: "Simple Veg", desc: "Onion & Tomato", price: 139, type: "veg" ,img :  veg2},
+    { name: "Garlic Pizza", desc: "Garlic & Cheese", price: 139, type: "veg" ,img :  veg3},
+    { name: "Veggie Crunch", desc: "Diced onion, Bell pappers & Fresh Mozzarella", price: 139, type: "veg" ,img :  veg4},
+    { name: "Corn Treat", desc: "Fresh Mozzarella Cheese & Juicy Golden Corn Kernels", price: 139, type: "veg" ,img :  veg5},
   ],
   "Veg V2": [
     { name: "Veggie Mix", desc: "Onion, Capsicum & Tomato", price: 179, type: "veg" },
@@ -327,6 +332,7 @@ const toppingPrices = {
 
 
 export default function PizzaMenu() {
+  
   const [filter, setFilter] = useState("all"); // Veg / NonVeg / Jain
   const [activeTab, setActiveTab] = useState("All");
   const [selectedPizza, setSelectedPizza] = useState(null);

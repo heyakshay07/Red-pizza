@@ -12,8 +12,9 @@ const Footer = () => {
            
             Shop No.04, Radiant Ivy, opposite to Brahma Exuberance, next to Eisha Loreals, Kausar Baugh, Kondhwa, Pune, Maharashtra 411048
           </p>
-          <p className="mt-2">+91-93224 33843</p>
-          {/* <p>franchise@uspizza.in</p> */}
+          {/* <p className="mt-2">+91-93224 33843<br> +91-74988 53593</br>+91-84848 38692 </p> */}
+          <p>+91-93224 33843 <br /> +91-74988 53593 <br /> +91-84848 38692  </p>
+          <p>redpizzapune@gmail.com</p>
         </div>
 
         {/* Stay Connected */}
