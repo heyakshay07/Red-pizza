@@ -70,6 +70,7 @@ import Salad from './pages/Menu/Salad'
 import Beverages from './pages/Menu/Beverages'
 import Dessert from './pages/Menu/Dessert'
 import ComboOffer from './pages/Menu/ComboOffer'
+import ParallaxSection from './components/ParallaxSection'
 
 
 
@@ -118,7 +119,7 @@ const App = () => {
         <Route path='/pages/menu/combo-offer' element={<ComboOffer/>}/>
 
       </Routes>
-   
+       <ParallaxSection/>
       {/* ✅ Footer ALWAYS VISIBLE */}
       <Footer />
 

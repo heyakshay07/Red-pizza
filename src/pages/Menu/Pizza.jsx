@@ -2,31 +2,40 @@ import React, { useState } from "react";
 import vegIcon from "../../assets/quickies/veg.png";
 import nonVegIcon from "../../assets/quickies/NV.png";
 
-import veg from "../../assets/pizza/vegPizza.jpeg";
+import veg1 from "../../assets/pizza/V1.png";
+import veg2 from "../../assets/pizza/v2.png"
+import veg3 from "../../assets/pizza/v3.png"
+import veg4 from "../../assets/pizza/v4.png"
+import veg5 from "../../assets/pizza/v5.png"
+import veg6 from "../../assets/pizza/v6.jpeg"
+import veg7 from "../../assets/pizza/v7.jpeg"
+import veg8 from "../../assets/pizza/v8.jpeg"
+import veg9 from "../../assets/pizza/v9.jpeg"
+import veg from "../../assets/pizza/vegPizza.jpeg"
 import nonvegPizza from "../../assets/pizza/nonvegPizza.jpeg";
 import jain from "../../assets/pizza/jain.jpeg";
 
 // ✅ Online Sample Pizza Images
 const pizzaImages = {
-  veg: veg,
+  veg,
   nonveg: nonvegPizza,
-  jain: jain,
+  jain,
 };
 
 // ✅ Pizza Data (grouped by version)
 const pizzaCategories = {
-  "Veg V1": [
-    { name: "Margherita", desc: "Fresh mozzarella with basil", price: 139, type: "veg" },
-    { name: "Simple Veg", desc: "Onion & Tomato", price: 139, type: "veg" },
-    { name: "Garlic Pizza", desc: "Garlic & Cheese", price: 139, type: "veg" },
-    { name: "Veggie Crunch", desc: "Diced onion, Bell pappers & Fresh Mozzarella", price: 139, type: "veg" },
-    { name: "Corn Treat", desc: "Fresh Mozzarella Cheese & Juicy Golden Corn Kernels", price: 139, type: "veg" },
+    "Veg V1": [
+    { name: "Margherita", desc: "Fresh mozzarella with basil", price: 139, type: "veg", img: veg1 },
+    { name: "Simple Veg", desc: "Onion & Tomato", price: 139, type: "veg", img: veg2 },
+    { name: "Garlic Pizza", desc: "Garlic & Cheese", price: 139, type: "veg", img: veg3 },
+    { name: "Veggie Crunch", desc: "Diced onion, Bell peppers & Mozzarella", price: 139, type: "veg", img: veg4 },
+    { name: "Corn Treat", desc: "Mozzarella & Golden Corn", price: 139, type: "veg", img: veg5 },
   ],
   "Veg V2": [
-    { name: "Veggie Mix", desc: "Onion, Capsicum & Tomato", price: 179, type: "veg" },
-    { name: "Mushroom Lovers", desc: "Mushroom, Garlic & Green Chili", price: 179, type: "veg" },
-    { name: "Corn Exotica", desc: "American Corn, Red Pepper & Cpasicum", price: 179, type: "veg" },
-    { name: "Spicy Veg", desc: "Fried Onion & Tomato With Special Spices", price: 179, type: "veg" },
+    { name: "Veggie Mix", desc: "Onion, Capsicum & Tomato", price: 179, type: "veg", img: veg6 },
+    { name: "Mushroom Lovers", desc: "Mushroom, Garlic & Green Chili", price: 179, type: "veg", img: veg7 },
+    { name: "Corn Exotica", desc: "American Corn, Red Pepper & Cpasicum", price: 179, type: "veg", img: veg8 },
+    { name: "Spicy Veg", desc: "Fried Onion & Tomato With Special Spices", price: 179, type: "veg", img: veg9 },
   ],
   "Veg V3": [
   { name: "Paneer Tikka", desc: "Paneer, Capsicum & Red Pepper", price: 209, medium: 419, large: 549, type: "veg" },
@@ -325,9 +334,8 @@ const toppingPrices = {
   nonveg: 40,
 };
 
-
 export default function PizzaMenu() {
-  const [filter, setFilter] = useState("all"); // Veg / NonVeg / Jain
+  const [filter, setFilter] = useState("all");
   const [activeTab, setActiveTab] = useState("All");
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [customTab, setCustomTab] = useState("toppings");
@@ -359,15 +367,13 @@ export default function PizzaMenu() {
 
   // ✅ Total Price
   const basePrice = selectedPizza?.price || 0;
-  const toppingPrice = selectedToppings.reduce(
-    (sum, t) => sum + (toppings.find((x) => x.name === t)?.price || 0),
-    0
-  );
+  const toppingPrice =
+    selectedToppings.length *
+    (selectedPizza?.type === "nonveg" ? toppingPrices.nonveg : toppingPrices.veg);
   const cheesePrice = selectedCheese?.price || 0;
   const baseExtra = selectedBase?.price || 0;
   const totalPrice = (basePrice + toppingPrice + cheesePrice + baseExtra) * quantity;
 
-  // ✅ Handle Popup close
   const handleOverlayClick = (e) => {
     if (e.target.id === "popup-overlay") setSelectedPizza(null);
   };
@@ -386,7 +392,7 @@ export default function PizzaMenu() {
         <p className="text-gray-500 mt-2">Freshly baked, cheesy, and delicious!</p>
       </div>
 
-      {/* Filter Toggle */}
+      {/* Filter */}
       <div className="flex justify-start gap-8 mb-6">
         {["veg", "nonveg", "jain"].map((type) => (
           <label key={type} className="flex items-center gap-2 cursor-pointer">
@@ -433,7 +439,7 @@ export default function PizzaMenu() {
             className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
           >
             <img
-              src={getPizzaImage(p.type)}
+              src={p.img || getPizzaImage(p.type)}
               alt={p.name}
               className="w-full h-44 object-cover"
             />
@@ -461,7 +467,7 @@ export default function PizzaMenu() {
         ))}
       </div>
 
-      {/* ✅ Popup Modal */}
+      {/* Popup */}
       {selectedPizza && (
         <div
           id="popup-overlay"
@@ -489,7 +495,7 @@ export default function PizzaMenu() {
             </div>
             <p className="text-gray-600 mb-4">{selectedPizza.desc}</p>
 
-            {/* Tabs inside popup */}
+            {/* Inner Tabs */}
             <div className="flex border-b mb-4">
               {["toppings", "cheese", "base"].map((t) => (
                 <button
@@ -506,25 +512,23 @@ export default function PizzaMenu() {
               ))}
             </div>
 
-            {/* Customization Content */}
-         {customTab === "toppings" && (
-  <div className="grid grid-cols-2 gap-2 mb-3">
-    {(selectedPizza.type === "nonveg" ? nonVegToppings : vegToppings).map((t) => (
-      <label key={t} className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          checked={selectedToppings.includes(t)}
-          onChange={() => toggleTopping(t)}
-        />
-        {t}{" "}
-        <span className="text-sm text-gray-500">
-          ₹{selectedPizza.type === "nonveg" ? toppingPrices.nonveg : toppingPrices.veg}
-        </span>
-      </label>
-    ))}
-  </div>
-)}
-
+            {customTab === "toppings" && (
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                {(selectedPizza.type === "nonveg" ? nonVegToppings : vegToppings).map((t) => (
+                  <label key={t} className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedToppings.includes(t)}
+                      onChange={() => toggleTopping(t)}
+                    />
+                    {t}
+                    <span className="text-sm text-gray-500">
+                      ₹{selectedPizza.type === "nonveg" ? toppingPrices.nonveg : toppingPrices.veg}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            )}
 
             {customTab === "cheese" && (
               <div className="grid grid-cols-2 gap-3">
@@ -560,7 +564,6 @@ export default function PizzaMenu() {
               </div>
             )}
 
-            {/* Quantity + Price */}
             <div className="flex justify-between items-center mt-6 border-t pt-4">
               <div className="flex items-center gap-3">
                 <button
