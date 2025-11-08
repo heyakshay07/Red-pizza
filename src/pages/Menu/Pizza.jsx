@@ -382,7 +382,7 @@ export default function PizzaMenu() {
     <div className="max-w-7xl mx-auto px-4 py-12 bg-white">
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-extrabold text-gray-800">🍕 Our Pizza Collection</h1>
+        <h1 className="text-3xl font-extrabold text-gray-800 mt-16">🍕 Our Pizza Collection</h1>
         <p className="text-gray-500 mt-2">Freshly baked, cheesy, and delicious!</p>
       </div>
 
