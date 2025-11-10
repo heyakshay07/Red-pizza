@@ -334,6 +334,7 @@ const toppingPrices = {
   nonveg: 40,
 };
 
+
 export default function PizzaMenu() {
   const [filter, setFilter] = useState("all");
   const [activeTab, setActiveTab] = useState("All");
