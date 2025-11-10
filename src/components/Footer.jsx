@@ -6,8 +6,8 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-10">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between gap-10">
         {/* Contact Us */}
-        <div className="md:w-1/3">
-          <h2 className="text-xl font-bold mb-4">Contact Us</h2>
+        <div className="md:w-1/3 text-center">
+          <h2 className="text-xl font-bold mb-4 text-center">Contact Us</h2>
           <p>
            
             Shop No.04, Radiant Ivy, opposite to Brahma Exuberance, next to Eisha Loreals, Kausar Baugh, Kondhwa, Pune, Maharashtra 411048
@@ -18,10 +18,10 @@ const Footer = () => {
         </div>
 
         {/* Stay Connected */}
-        <div className="md:w-1/3">
+        <div className="md:w-1/3 text-center">
           <h2 className="text-xl font-bold mb-4">Stay Connected</h2>
           <p className="mb-2">Follow us on social media channels</p>
-          <div className="flex gap-4 text-orange-500 text-2xl">
+          <div className="flex gap-4 text-orange-500 text-2xl px-20">
             <FaFacebookF className="hover:text-orange-400 cursor-pointer" />
             <FaInstagram className="hover:text-orange-400 cursor-pointer" />
             <FaTwitter className="hover:text-orange-400 cursor-pointer" />
@@ -31,9 +31,9 @@ const Footer = () => {
 
         {/* Timings */}
         <div className="md:w-1/3">
-          <h2 className="text-xl font-bold mb-4">Timings</h2>
-          <p>Monday - Sunday</p>
-          <p>11:00 AM - 10:00 PM</p>
+          <h2 className="text-xl font-bold mb-4 text-center">Timings</h2>
+          <p className="text-center">Monday - Sunday</p>
+          <p className="text-center">11:00 AM - 10:00 PM</p>
         </div>
       </div>
 
