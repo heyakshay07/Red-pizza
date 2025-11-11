@@ -12,11 +12,25 @@ import ComboOffer from "./Menu/ComboOffer";
 import vegIcon from "../assets/quickies/veg.png";
 import nonVegIcon from "../assets/quickies/NV.png";
 
+import img from "../../src/assets/navbar/pizza1.jpg";
+
 const MenuPage = () => {
   const [filter, setFilter] = useState("all");
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
+            <div className="relative w-full h-[250px] md:h-[400px] mb-10">
+              <img
+                src={img}
+                alt="pizza"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0  bg-opacity-40 flex items-center justify-center">
+                <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+                  Menu Page
+                </h1>
+              </div>
+            </div>
       {/* 🔝 Filter Bar */}
       <div className="flex justify-start items-center gap-4 mb-10 mt-20">
         <button

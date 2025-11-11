@@ -29,6 +29,7 @@ import Dessert from "./pages/Menu/Dessert";
 import ComboOffer from "./pages/Menu/ComboOffer";
 import ParallaxSection from "./components/ParallaxSection";
 import TrustpilotSection from "./components/TrustpilotSection";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -75,6 +76,10 @@ const App = () => {
         <Route path="/pages/menu/beverages" element={<Beverages />} />
         <Route path="/pages/menu/dessert" element={<Dessert />} />
         <Route path="/pages/menu/combo-offer" element={<ComboOffer />} />
+
+        <Route path="/pages/profile" element={<Profile />} />
+        
+
       </Routes>
       <ParallaxSection />
       {/* ✅ Footer ALWAYS VISIBLE */}

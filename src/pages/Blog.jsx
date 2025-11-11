@@ -64,7 +64,7 @@ const Blog = () => {
 
   return (
     <div>
-      <div className="relative w-full h-[500px] md:h-[400px] mb-10">
+      <div className="relative w-full h-[250px] md:h-[400px] mb-10">
         <img
           src={img}
           alt="pizza"
