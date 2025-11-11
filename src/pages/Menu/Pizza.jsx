@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { CartContext } from "../../context/CartContext"; // ✅ added
 import vegIcon from "../../assets/quickies/veg.png";
 import nonVegIcon from "../../assets/quickies/NV.png";
 
 import veg1 from "../../assets/pizza/V1.png";
-import veg2 from "../../assets/pizza/v2.png"
-import veg3 from "../../assets/pizza/v3.png"
-import veg4 from "../../assets/pizza/v4.png"
-import veg5 from "../../assets/pizza/v5.png"
-import veg6 from "../../assets/pizza/v6.jpeg"
-import veg7 from "../../assets/pizza/v7.jpeg"
-import veg8 from "../../assets/pizza/v8.jpeg"
-import veg9 from "../../assets/pizza/v9.jpeg"
-import veg from "../../assets/pizza/vegPizza.jpeg"
+import veg2 from "../../assets/pizza/v2.png";
+import veg3 from "../../assets/pizza/v3.png";
+import veg4 from "../../assets/pizza/v4.png";
+import veg5 from "../../assets/pizza/v5.png";
+import veg6 from "../../assets/pizza/v6.jpeg";
+import veg7 from "../../assets/pizza/v7.jpeg";
+import veg8 from "../../assets/pizza/v8.jpeg";
+import veg9 from "../../assets/pizza/v9.jpeg";
+import veg from "../../assets/pizza/vegPizza.jpeg";
 import nonvegPizza from "../../assets/pizza/nonvegPizza.jpeg";
 import jain from "../../assets/pizza/jain.jpeg";
 
@@ -22,16 +23,16 @@ const pizzaImages = {
   jain,
 };
 
-// ✅ Pizza Data (grouped by version)
+// ✅ Pizza Data
 const pizzaCategories = {
-    "Veg V1": [
+  "Veg V1": [
     { name: "Margherita", desc: "Fresh mozzarella with basil", price: 139, type: "veg", img: veg1 },
     { name: "Simple Veg", desc: "Onion & Tomato", price: 139, type: "veg", img: veg2 },
     { name: "Garlic Pizza", desc: "Garlic & Cheese", price: 139, type: "veg", img: veg3 },
     { name: "Veggie Crunch", desc: "Diced onion, Bell peppers & Mozzarella", price: 139, type: "veg", img: veg4 },
     { name: "Corn Treat", desc: "Mozzarella & Golden Corn", price: 139, type: "veg", img: veg5 },
   ],
-  "Veg V2": [
+    "Veg V2": [
     { name: "Veggie Mix", desc: "Onion, Capsicum & Tomato", price: 179, type: "veg", img: veg6 },
     { name: "Mushroom Lovers", desc: "Mushroom, Garlic & Green Chili", price: 179, type: "veg", img: veg7 },
     { name: "Corn Exotica", desc: "American Corn, Red Pepper & Cpasicum", price: 179, type: "veg", img: veg8 },
@@ -300,42 +301,24 @@ const pizzaCategories = {
   ],
 };
 
-// ✅ Customization Options
-const vegToppings = [
-  "Onion",
-  "Tomato",
-  "Capsicum",
-  "Mushroom",
-  "Jalapeno",
-  "Corn",
-  "Black Olives",
-];
-const nonVegToppings = [
-  "Chicken Tikka",
-  "Roast Chicken",
-  "Barbeque Chicken",
-];
 
+// ✅ Customization Options
+const vegToppings = ["Onion", "Tomato", "Capsicum", "Mushroom", "Jalapeno", "Corn", "Black Olives"];
+const nonVegToppings = ["Chicken Tikka", "Roast Chicken", "Barbeque Chicken"];
 const cheeseOptions = [
   { name: "Regular ", price: 100 },
   { name: "Medium ", price: 125 },
   { name: "Large ", price: 140 },
 ];
-
 const baseOptions = [
   { name: "Plain", price: 0 },
   { name: "Cheese Burst", price: 50 },
   { name: "Garlic Crust", price: 40 },
 ];
-
-// ✅ Topping price
-const toppingPrices = {
-  veg: 25,
-  nonveg: 40,
-};
-
+const toppingPrices = { veg: 25, nonveg: 40 };
 
 export default function PizzaMenu() {
+  const { handleAddToCart } = useContext(CartContext); // ✅ Added
   const [filter, setFilter] = useState("all");
   const [activeTab, setActiveTab] = useState("All");
   const [selectedPizza, setSelectedPizza] = useState(null);
@@ -359,14 +342,10 @@ export default function PizzaMenu() {
       ? filteredCategories.flatMap(([, pizzas]) => pizzas)
       : pizzaCategories[activeTab] || [];
 
-  // ✅ Toggle toppings
   const toggleTopping = (t) => {
-    setSelectedToppings((prev) =>
-      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
-    );
+    setSelectedToppings((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
   };
 
-  // ✅ Total Price
   const basePrice = selectedPizza?.price || 0;
   const toppingPrice =
     selectedToppings.length *
@@ -385,9 +364,25 @@ export default function PizzaMenu() {
     return pizzaImages.veg;
   };
 
+  // ✅ Add-to-cart function
+  const handleAddToCartClick = () => {
+    if (!selectedPizza) return;
+    const itemToAdd = {
+      id: `${selectedPizza.name}-${Date.now()}`,
+      ...selectedPizza,
+      image: selectedPizza.img || getPizzaImage(selectedPizza.type),
+      toppings: selectedToppings,
+      cheese: selectedCheese,
+      base: selectedBase,
+      quantity,
+      totalPrice,
+    };
+    handleAddToCart(itemToAdd);
+    setSelectedPizza(null);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 bg-white">
-      {/* Header */}
       <div className="text-center mb-10">
         <h1 className="text-3xl font-extrabold text-gray-800 mt-16">🍕 Our Pizza Collection</h1>
         <p className="text-gray-500 mt-2">Freshly baked, cheesy, and delicious!</p>
@@ -435,22 +430,11 @@ export default function PizzaMenu() {
       {/* Pizza Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {displayedPizzas.map((p, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
-          >
-            <img
-              src={p.img || getPizzaImage(p.type)}
-              alt={p.name}
-              className="w-full h-44 object-cover"
-            />
+          <div key={index} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src={p.img || getPizzaImage(p.type)} alt={p.name} className="w-full h-44 object-cover" />
             <div className="p-4">
               <div className="flex items-center gap-2 mb-1">
-                <img
-                  src={p.type === "nonveg" ? nonVegIcon : vegIcon}
-                  alt="type"
-                  className="w-4 h-4"
-                />
+                <img src={p.type === "nonveg" ? nonVegIcon : vegIcon} alt="type" className="w-4 h-4" />
                 <h3 className="font-semibold text-gray-800">{p.name}</h3>
               </div>
               <p className="text-gray-500 text-sm mb-3">{p.desc}</p>
@@ -588,10 +572,7 @@ export default function PizzaMenu() {
             </div>
 
             <button
-              onClick={() => {
-                alert(`✅ Added ${selectedPizza.name} — ₹${totalPrice}`);
-                setSelectedPizza(null);
-              }}
+              onClick={handleAddToCartClick}
               className="w-full mt-6 bg-green-600 text-white py-2 rounded-lg text-lg font-semibold hover:bg-green-700"
             >
               Add to Cart

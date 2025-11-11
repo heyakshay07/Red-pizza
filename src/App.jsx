@@ -30,7 +30,11 @@ import ComboOffer from "./pages/Menu/ComboOffer";
 import ParallaxSection from "./components/ParallaxSection";
 import TrustpilotSection from "./components/TrustpilotSection";
 import Profile from "./pages/Profile";
+
 import SignIn from "./pages/SignIn"
+
+import Cart from "./pages/Cart";
+
 
 const App = () => {
   return (
@@ -82,6 +86,7 @@ const App = () => {
 
         <Route path="/pages/signin" element={<SignIn />} />
         
+         <Route path="/cart" element={<Cart />} />
 
       </Routes>
       <ParallaxSection />
