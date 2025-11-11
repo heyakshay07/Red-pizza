@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
+import { useLocation } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
+
 import vegIcon from "../../assets/quickies/veg.png";
 import nonVegIcon from "../../assets/quickies/NV.png";
 
@@ -23,24 +26,16 @@ const items = [
   { id: "kabab-119", name: "Red Chicken Kabab (5 pcs)", price: 119, desc: "Minced chicken, garlic, onion, tomato, spices — juicy kebabs.", img: kabab, type: "nonveg" },
 ];
 
-// ✅ Customization Data
+// ✅ Extra configuration
 const vegToppings = ["Onion", "Tomato", "Capsicum", "Mushroom", "Jalapeno", "American Corn", "Black Olives", "Baby Corn", "Garlic", "Red Pepper", "Pineapple"];
 const nonVegToppings = ["Spicy Chicken", "Roast Chicken", "Barbequed Chicken", "Plain Chicken", "Chicken Salami", "Chicken Sausage", "Chicken Schezwan", "Chicken Tikka", "Chicken Kheema"];
-
-const cheeseOptions = [
-  { name: "Regular", price: 100 },
-  { name: "Medium", price: 125 },
-  { name: "Large", price: 140 },
-];
-
+const cheeseOptions = [{ name: "Regular", price: 100 }, { name: "Medium", price: 125 }, { name: "Large", price: 140 }];
 const baseOptions = [
   { name: "Stuffed Crust", sizes: [{ size: "R", price: 105 }, { size: "M", price: 155 }] },
   { name: "Cheese Burst", sizes: [{ size: "R", price: 125 }, { size: "M", price: 159 }] },
   { name: "Thin Crust", sizes: [{ size: "R", price: 79 }, { size: "M", price: 119 }, { size: "L", price: 159 }] },
   { name: "Pan Tossed", sizes: [{ size: "R", price: 79 }, { size: "M", price: 119 }, { size: "L", price: 159 }] },
 ];
-
-// ✅ Topping price by size
 const toppingPrices = {
   veg: { R: 60, M: 85, L: 115 },
   nonveg: { R: 90, M: 110, L: 125 },
@@ -56,61 +51,69 @@ export default function Quickies() {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("R");
 
-  const filteredItems = items.filter((item) =>
-    filter === "all" ? true : item.type === filter
-  );
+   const { handleAddToCart } = useContext(CartContext);
 
-  const toggleTopping = (t) => {
-    setSelectedToppings((prev) =>
-      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
-    );
-  };
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("search")?.toLowerCase() || "";
 
+  // ✅ Filtering
+  const filteredItems = items.filter((item) => {
+    const matchesType = filter === "all" || item.type === filter;
+    const matchesSearch =
+      !searchQuery ||
+      item.name.toLowerCase().includes(searchQuery) ||
+      item.desc.toLowerCase().includes(searchQuery);
+    return matchesType && matchesSearch;
+  });
+
+  // ✅ Helper values
   const vegToppingPrice = toppingPrices.veg[size];
   const nonVegToppingPrice = toppingPrices.nonveg[size];
 
-  const vegSelected = selectedToppings.filter((t) => vegToppings.includes(t)).length;
-  const nonVegSelected = selectedToppings.filter((t) => nonVegToppings.includes(t)).length;
-
-  const basePrice = selectedItem?.price || 0;
-  const toppingPrice = vegSelected * vegToppingPrice + nonVegSelected * nonVegToppingPrice;
-  const cheesePrice = selectedCheese?.price || 0;
-  const baseExtra = selectedBase?.price || 0;
-  const totalPrice = (basePrice + toppingPrice + cheesePrice + baseExtra) * quantity;
-
-  const handleAddToCart = async () => {
-    const cartItem = {
-      id: selectedItem.id,
-      name: selectedItem.name,
-      size,
-      quantity,
-      toppings: selectedToppings,
-      cheese: selectedCheese?.name,
-      base: selectedBase?.name,
-      totalPrice,
-    };
-    try {
-      await fetch("/api/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cartItem),
-      });
-      alert("✅ Added to cart!");
-      setSelectedItem(null);
-    } catch {
-      alert("❌ Failed to add to cart");
-    }
+  // ✅ Toggle toppings
+  const toggleTopping = (topping) => {
+    setSelectedToppings((prev) =>
+      prev.includes(topping) ? prev.filter((t) => t !== topping) : [...prev, topping]
+    );
   };
+
+  // ✅ Calculate total price
+  const totalPrice = (() => {
+    if (!selectedItem) return 0;
+    const basePrice = selectedItem.price;
+    const toppingCost =
+      selectedToppings.reduce((acc, topping) => {
+        const isVeg = vegToppings.includes(topping);
+        const price = isVeg ? vegToppingPrice : nonVegToppingPrice;
+        return acc + price;
+      }, 0) || 0;
+
+    const cheeseCost = selectedCheese?.price || 0;
+    const baseCost = selectedBase?.price || 0;
+
+    return (basePrice + toppingCost + cheeseCost + baseCost) * quantity;
+  })();
+
+  // ✅ Add to cart handler
+  // const handleAddToCart = () => {
+  //   alert(`${selectedItem.name} added to cart!\nTotal: ₹${totalPrice}`);
+  //   setSelectedItem(null);
+  // };
 
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 py-10">
-        {/* Header */}
         <div className="text-center mb-8 mt-8">
           <h1 className="text-3xl font-extrabold text-gray-800 mt-16">Quickies</h1>
           <p className="text-gray-600 mt-2">
             Bite-sized delights — perfect to pair with your pizza!
           </p>
+          {searchQuery && (
+            <p className="text-sm text-gray-500 mt-1">
+              Showing results for “{searchQuery}”
+            </p>
+          )}
         </div>
 
         {/* Filters */}
@@ -118,7 +121,10 @@ export default function Quickies() {
           {["all", "veg", "nonveg"].map((type) => (
             <button
               key={type}
-              onClick={() => setFilter(type)}
+              onClick={() => {
+                setFilter(type);
+                window.history.replaceState({}, "", "/menupage");
+              }}
               className={`px-4 py-2 rounded flex items-center gap-2 ${
                 filter === type
                   ? type === "veg"
@@ -129,49 +135,53 @@ export default function Quickies() {
                   : "bg-gray-200"
               }`}
             >
-              {type === "veg" && <img src={vegIcon} className="w-4 h-4" />}
-              {type === "nonveg" && <img src={nonVegIcon} className="w-4 h-4" />}
+              {type === "veg" && <img src={vegIcon} className="w-4 h-4" alt="veg" />}
+              {type === "nonveg" && <img src={nonVegIcon} className="w-4 h-4" alt="nonveg" />}
               {type === "all" ? "All" : type === "veg" ? "Veg" : "Non-Veg"}
             </button>
           ))}
         </div>
 
-        {/* Item Grid */}
+        {/* Items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredItems.map((it) => (
-            <div key={it.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-              <img src={it.img} alt={it.name} className="w-full h-40 object-cover" />
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <img src={it.type === "veg" ? vegIcon : nonVegIcon} className="w-4 h-4" alt="type" />
-                  <h3 className="font-semibold text-gray-800">{it.name}</h3>
-                </div>
-                <p className="text-gray-500 text-sm mb-3">{it.desc}</p>
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-gray-800">₹ {it.price}</span>
-                  <button
-                    onClick={() => setSelectedItem(it)}
-                    className="px-4 py-1 rounded bg-red-500 text-white hover:bg-red-600"
-                  >
-                    + Add
-                  </button>
+          {filteredItems.length > 0 ? (
+            filteredItems.map((it) => (
+              <div key={it.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+                <img src={it.img} alt={it.name} className="w-full h-40 object-cover" />
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <img src={it.type === "veg" ? vegIcon : nonVegIcon} className="w-4 h-4" alt="type" />
+                    <h3 className="font-semibold text-gray-800">{it.name}</h3>
+                  </div>
+                  <p className="text-gray-500 text-sm mb-3">{it.desc}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-gray-800">₹ {it.price}</span>
+                    <button
+                      // onClick={() =>{ setSelectedItem(it)}}
+                       onClick={() => {
+                        handleAddToCart(it)
+                        }}
+                      className="px-4 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+                    >
+                      + Add
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-center text-gray-500 col-span-full">
+              No items found for “{searchQuery}”
+            </p>
+          )}
         </div>
       </div>
 
-      {/* ✅ POPUP MODAL */}
+      {/* Popup Modal */}
       {selectedItem && (
-        <div
-          className="fixed inset-0 flex justify-center items-center z-50"
-          onClick={() => setSelectedItem(null)}
-        >
-          {/* Background blur */}
+        <div className="fixed inset-0 flex justify-center items-center z-50" onClick={() => setSelectedItem(null)}>
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
 
-          {/* Popup */}
           <div
             className="relative bg-white w-full max-w-lg rounded-lg shadow-lg p-6 overflow-y-auto max-h-[90vh] z-10"
             onClick={(e) => e.stopPropagation()}
@@ -225,11 +235,7 @@ export default function Quickies() {
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   {vegToppings.map((t) => (
                     <label key={t} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={selectedToppings.includes(t)}
-                        onChange={() => toggleTopping(t)}
-                      />
+                      <input type="checkbox" checked={selectedToppings.includes(t)} onChange={() => toggleTopping(t)} />
                       {t}
                     </label>
                   ))}
@@ -242,11 +248,7 @@ export default function Quickies() {
                 <div className="grid grid-cols-2 gap-2">
                   {nonVegToppings.map((t) => (
                     <label key={t} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={selectedToppings.includes(t)}
-                        onChange={() => toggleTopping(t)}
-                      />
+                      <input type="checkbox" checked={selectedToppings.includes(t)} onChange={() => toggleTopping(t)} />
                       {t}
                     </label>
                   ))}
