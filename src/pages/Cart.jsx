@@ -1,20 +1,28 @@
 import React, { useContext } from "react";
-// import ProductList from '../components/ProductList'
-// import CartSidebar from '../components/CartSidebar'
 import { CartContext } from "../context/CartContext";
+import { Trash2, X } from "lucide-react"; // ✅ Added X icon
 
-import { Trash2 } from "lucide-react";  
-  
-
-const Cart = () => {
-    const { handleAddToCart, setCart , cart, increaseQty, decreaseQty, removeItem, totalAmount} = useContext(CartContext);
-     console.log('cart -----', cart )
-
-
-
+const Cart = ({ onClose }) => {
+  const {
+    handleAddToCart,
+    setCart,
+    cart,
+    increaseQty,
+    decreaseQty,
+    removeItem,
+    totalAmount,
+  } = useContext(CartContext);
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-4 bg-white rounded-xl shadow border mt-24 mb-1">
+    <div className="relative w-full max-w-2xl mx-auto p-4 bg-white rounded-xl shadow border mt-24 mb-1">
+      {/* ✅ Close Button */}
+      <button
+        onClick={onClose}
+        className="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl"
+      >
+        <X size={24} />
+      </button>
+
       <h2 className="text-2xl font-bold mb-4 text-center">🛒 Your Cart</h2>
 
       {cart.length === 0 ? (
@@ -36,7 +44,6 @@ const Cart = () => {
                   <div>
                     <h3 className="font-semibold text-gray-800">{item.name}</h3>
                     <p className="text-gray-500 text-sm">₹{item.price}</p>
-                    {/* <p className="text-gray-500 text-sm">₹{item.totalPrice}</p> */}
                     <div className="flex items-center mt-2 border rounded-md overflow-hidden">
                       <button
                         onClick={() => decreaseQty(item.id)}
@@ -72,7 +79,9 @@ const Cart = () => {
 
           <div className="mt-6 border-t pt-4 flex justify-between items-center">
             <span className="font-semibold text-lg">Total:</span>
-            <span className="text-sky-600 font-bold text-xl">₹{totalAmount}</span>
+            <span className="text-sky-600 font-bold text-xl">
+              ₹{totalAmount}
+            </span>
           </div>
 
           <div className="mt-4 flex gap-3">
@@ -86,7 +95,7 @@ const Cart = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

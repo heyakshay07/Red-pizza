@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import QuickieModal from "./QuickieModal"; // import modal
 
 import coup1 from "../assets/coupens/coup1.jpg";
 import coup2 from "../assets/coupens/coup2.jpg";
@@ -9,19 +10,22 @@ import coup5 from "../assets/coupens/coup5.jpg";
 
 const Popular = () => {
   const cards = [
-    { id: 1, title: "Margherita Pizza", price: "₹299", discount: "20% OFF", img: coup1 },
-    { id: 2, title: "Farmhouse Pizza", price: "₹399", discount: "15% OFF", img: coup2 },
-    { id: 3, title: "Cheese Burst Pizza", price: "₹449", discount: "25% OFF", img: coup3 },
-    { id: 4, title: "Spicy Paneer Pizza", price: "₹349", discount: "10% OFF", img: coup4 },
-    { id: 5, title: "Peri Peri Pizza", price: "₹299", discount: "18% OFF", img: coup5 },
+    { id: 1, name: "Margherita Pizza", price: 299, discount: "20% OFF", img: coup1, desc: "Classic delight with 100% real mozzarella cheese" },
+    { id: 2, name: "Farmhouse Pizza", price: 399, discount: "15% OFF", img: coup2, desc: "Delightful combination of onion, capsicum, tomato & grilled mushroom" },
+    { id: 3, name: "Cheese Burst Pizza", price: 449, discount: "25% OFF", img: coup3, desc: "Loaded with extra cheese for cheese lovers" },
+    { id: 4, name: "Spicy Paneer Pizza", price: 349, discount: "10% OFF", img: coup4, desc: "Spicy paneer topping with fresh veggies" },
+    { id: 5, name: "Peri Peri Pizza", price: 299, discount: "18% OFF", img: coup5, desc: "Peri Peri seasoning with juicy chicken" },
   ];
 
   const [current, setCurrent] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(4);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [cart, setCart] = useState([]);
+
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // ✅ Dynamic cards per view
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) setCardsPerView(1);
@@ -41,7 +45,6 @@ const Popular = () => {
     if (current > 0) setCurrent(current - 1);
   };
 
-  // ✅ Swipe support
   const handleTouchStart = (e) => (touchStartX.current = e.touches[0].clientX);
   const handleTouchMove = (e) => (touchEndX.current = e.touches[0].clientX);
   const handleTouchEnd = () => {
@@ -51,11 +54,21 @@ const Popular = () => {
     else if (delta < -threshold) prevSlide();
   };
 
+  const handleOpenModal = (item) => {
+    setSelectedItem(item);
+    setShowModal(true);
+  };
+
+  const handleAddToCart = (cartItem) => {
+    setCart((prev) => [...prev, cartItem]);
+    setShowModal(false);
+    console.log("Cart:", [...cart, cartItem]); // for testing
+  };
+
   return (
     <div className="relative max-w-7xl mx-auto px-4 py-12 bg-[#f7f1e9] rounded-lg">
       <h2 className="text-2xl font-semibold mb-6 text-center sm:text-left">Popular Pizzas</h2>
 
-      {/* ✅ Slider Container */}
       <div
         className="overflow-hidden"
         onTouchStart={handleTouchStart}
@@ -76,31 +89,31 @@ const Popular = () => {
               <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col h-full">
                 <img
                   src={card.img}
-                  alt={card.title}
+                  alt={card.name}
                   className="w-full h-44 sm:h-52 md:h-56 object-cover"
                 />
 
                 <div className="p-3 sm:p-4 flex flex-col flex-grow">
                   <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-800">
-                    {card.title}
+                    {card.name}
                   </h3>
 
                   <div className="flex justify-between items-center mt-2">
-                    <span className="text-base sm:text-lg font-bold text-red-600">{card.price}</span>
+                    <span className="text-base sm:text-lg font-bold text-red-600">₹{card.price}</span>
                     <span className="text-xs sm:text-sm text-green-600 font-semibold bg-green-100 px-2 py-0.5 rounded">
                       {card.discount}
                     </span>
                   </div>
 
-                  {/* ✅ Fully Responsive Auto-sized Button */}
-                  <div className="mt-auto flex justify-center">
+                  <div className="mt-auto flex justify-end">
                     <button
+                      onClick={() => handleOpenModal(card)}
                       className="mt-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition active:scale-95 
                                  text-xs sm:text-sm md:text-base 
                                  px-3 sm:px-4 md:px-5 
                                  py-1 sm:py-1.5 md:py-2"
                     >
-                      Order Online 
+                      + Add
                     </button>
                   </div>
                 </div>
@@ -110,7 +123,6 @@ const Popular = () => {
         </div>
       </div>
 
-      {/* ✅ Arrows */}
       {current > 0 && (
         <button
           onClick={prevSlide}
@@ -127,6 +139,15 @@ const Popular = () => {
         >
           <ChevronRight size={22} className="text-white" />
         </button>
+      )}
+
+      {/* Quickie Modal */}
+      {showModal && selectedItem && (
+        <QuickieModal
+          item={selectedItem}
+          onClose={() => setShowModal(false)}
+          onAddToCart={handleAddToCart}
+        />
       )}
     </div>
   );
