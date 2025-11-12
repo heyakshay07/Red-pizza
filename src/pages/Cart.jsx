@@ -85,11 +85,11 @@ const Cart = ({ onClose }) => {
           </div>
 
           <div className="mt-4 flex gap-3">
-            <button className="w-1/2 bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
+            {/* <button className="w-1/2 bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
               View Cart
-            </button>
-            <button className="w-1/2 bg-green-500 text-white py-2 rounded hover:bg-green-600">
-              Checkout
+            </button> */}
+            <button className="w-1/2 bg-green-500 text-white py-2 rounded item-end hover:bg-green-600">
+              Place Order
             </button>
           </div>
         </div>
