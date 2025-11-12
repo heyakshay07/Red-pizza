@@ -36,11 +36,14 @@ import SignIn from "./pages/SignIn"
 import Cart from "./pages/Cart";
 
 
+
+
 const App = () => {
   return (
     <div>
       {/* ✅ Navbar ALWAYS VISIBLE */}
       <Navbar />
+      
       <FloatingOrderButton />
 
       {/* ✅ ROUTES */}
@@ -51,6 +54,7 @@ const App = () => {
           element={
             <>
               <HeroSlider />
+            
               <div className="w-full bg-[#f7f1e9]">
                 <Coupens />
                 <Popular />
@@ -90,7 +94,8 @@ const App = () => {
 
       </Routes>
       <ParallaxSection />
-      {/* ✅ Footer ALWAYS VISIBLE */}
+    
+   
       <Footer />
     </div>
   );

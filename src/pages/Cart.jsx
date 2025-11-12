@@ -63,12 +63,12 @@ const Cart = ({ onClose }) => {
                 </div>
 
                 <div className="flex flex-col items-end">
-                  <span className="font-semibold text-sky-600 text-lg">
+                  <span className="font-semibold text-red-600 text-lg">
                     ₹{item.price * item.quantity}
                   </span>
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="mt-2 bg-sky-500 hover:bg-sky-600 text-white p-2 rounded"
+                    className="mt-2 bg-red-500 hover:bg-red-600 text-white p-2 rounded"
                   >
                     <Trash2 size={16} />
                   </button>
@@ -79,16 +79,16 @@ const Cart = ({ onClose }) => {
 
           <div className="mt-6 border-t pt-4 flex justify-between items-center">
             <span className="font-semibold text-lg">Total:</span>
-            <span className="text-sky-600 font-bold text-xl">
+            <span className="text-red-600 font-bold text-xl">
               ₹{totalAmount}
             </span>
           </div>
 
           <div className="mt-4 flex gap-3">
-            {/* <button className="w-1/2 bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
+            {/* <button className="w-1/2 bg-red-500 text-white py-2 rounded hover:bg-red-600">
               View Cart
             </button> */}
-            <button className="w-1/2 bg-green-500 text-white py-2 rounded item-end hover:bg-green-600">
+            <button className="w-1/2 bg-red-500 text-white py-2 rounded item-end">
               Place Order
             </button>
           </div>

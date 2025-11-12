@@ -322,21 +322,6 @@
 // export default Navbar;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect,  useContext  } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart, Search, X } from "lucide-react";
@@ -499,3 +484,9 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
+
