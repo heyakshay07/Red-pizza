@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { Trash2, X } from "lucide-react"; // ✅ Added X icon
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ onClose }) => {
   const {
@@ -12,6 +13,8 @@ const Cart = ({ onClose }) => {
     removeItem,
     totalAmount,
   } = useContext(CartContext);
+ 
+  const navigate = useNavigate();
 
   return (
     <div className="relative w-full max-w-2xl mx-auto p-4 bg-white rounded-xl shadow border mt-24 mb-1">
@@ -88,7 +91,9 @@ const Cart = ({ onClose }) => {
             {/* <button className="w-1/2 bg-red-500 text-white py-2 rounded hover:bg-red-600">
               View Cart
             </button> */}
-            <button className="w-1/2 bg-red-500 text-white py-2 rounded item-end">
+            <button onClick={() => {
+               navigate('/order', { state: { order: cart } });
+            }}  className="w-1/2 bg-red-500 text-white py-2 rounded item-end">
               Place Order
             </button>
           </div>

@@ -51,7 +51,7 @@ export default function QuickieModal({ item, onClose, onAddToCart }) {
       id: item.id,
       name: item.name,
       img: item.img,        // ✅ image
-      price: item.price,    // ✅ base price
+      price: totalPrice,    // ✅ base price
       size,
       quantity,
       toppings: selectedToppings,

@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import QuickieModal from "./QuickieModal"; // import modal
-
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 import coup1 from "../assets/coupens/coup1.jpg";
 import coup2 from "../assets/coupens/coup2.jpg";
 import coup3 from "../assets/coupens/coup3.jpg";
@@ -59,11 +60,13 @@ const Popular = () => {
     setShowModal(true);
   };
 
-  const handleAddToCart = (cartItem) => {
-    setCart((prev) => [...prev, cartItem]);
-    setShowModal(false);
-    console.log("Cart:", [...cart, cartItem]); // for testing
-  };
+  const {handleAddToCart} = useContext(CartContext);
+
+  // const handleAddToCart = (cartItem) => {
+  //   setCart((prev) => [...prev, cartItem]);
+  //   setShowModal(false);
+  //   console.log("Cart:", [...cart, cartItem]); // for testing
+  // };
 
   return (
     <div className="relative max-w-7xl mx-auto px-4 py-12 bg-[#f7f1e9] rounded-lg">

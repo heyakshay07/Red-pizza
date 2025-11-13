@@ -4,7 +4,7 @@
 // src/pages/Order.jsx
 import React, { useMemo, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { useLocation } from "react-router-dom";
 export default function RedPizzaOrderPage() {
   const SAMPLE_MENU = [
     { id: 1, name: "Margherita Classic", desc: "Tomato sauce, fresh mozzarella, basil", price: 249, veg: true },
@@ -12,6 +12,10 @@ export default function RedPizzaOrderPage() {
     { id: 3, name: "Truffle Alfredo", desc: "Creamy sauce, mushrooms, truffle oil", price: 349, veg: true },
     { id: 4, name: "BBQ Chicken", desc: "BBQ glaze, roasted chicken, onions", price: 329, veg: false },
   ];
+    const location = useLocation();
+ const { order } = location.state || {};  
+
+  console.log("Received order:", order);
 
   const [cart, setCart] = useState([]);
   const [selected, setSelected] = useState(SAMPLE_MENU[0]);
@@ -54,7 +58,7 @@ export default function RedPizzaOrderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-red-50 to-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-red-50 to-white p-6 mt-20">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left / Main: Menu + Large Visual */}
         <section className="lg:col-span-2 bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -100,7 +104,7 @@ export default function RedPizzaOrderPage() {
             <div className="w-full md:w-1/2 p-6">
               <h4 className="text-lg font-semibold">Menu</h4>
               <div className="mt-4 grid grid-cols-1 gap-4">
-                {SAMPLE_MENU.map((m) => (
+                {order.map((m) => (
                   <motion.div
                     key={m.id}
                     layout
@@ -111,11 +115,14 @@ export default function RedPizzaOrderPage() {
                     onClick={() => setSelected(m)}
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-sm font-semibold ${m.veg ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                      {/* <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-sm font-semibold ${m.veg ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
                         {m.veg ? 'VEG' : 'NON-VEG'}
-                      </div>
+                      </div> */}
                       <div>
                         <div className="font-medium">{m.name}</div>
+                        <div className="">
+                          <img src={m.img} className="w-20 h-10" alt="" />
+                        </div>
                         <div className="text-sm opacity-80">{m.desc}</div>
                       </div>
                     </div>

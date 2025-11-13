@@ -93,10 +93,7 @@ export default function SignIn() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-6"
-      
-    >
+    <div className="min-h-screen flex items-center justify-center p-6 mt-15 ">
       <div className="backdrop-blur-sm bg-white/80 shadow-xl rounded-2xl max-w-4xl w-full flex flex-col md:flex-row overflow-hidden">
         {/* Left: Form */}
         <div className="w-full md:w-1/2 p-8">
