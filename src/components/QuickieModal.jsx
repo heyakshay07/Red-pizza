@@ -5,10 +5,11 @@ export default function QuickieModal({ item, onClose, onAddToCart }) {
   const nonVegToppings = ["Spicy Chicken", "Roast Chicken", "Barbequed Chicken", "Plain Chicken", "Chicken Salami", "Chicken Sausage", "Chicken Schezwan", "Chicken Tikka", "Chicken Kheema"];
 
   const cheeseOptions = [
-    { name: "Regular", price: 100 },
-    { name: "Medium", price: 125 },
-    { name: "Large", price: 140 },
-  ];
+  { name: "Regular", price: 100 },
+  { name: "Medium", price: 125 },
+  { name: "Large", price: 140 },
+];
+
 
   const baseOptions = [
     { name: "Stuffed Crust", sizes: [{ size: "R", price: 105 }, { size: "M", price: 155 }] },
@@ -91,7 +92,7 @@ export default function QuickieModal({ item, onClose, onAddToCart }) {
                 size === s ? "bg-red-500 text-white border-red-500" : "border-gray-300"
               }`}
             >
-              {s === "R" ? "Regular" : s === "M" ? "Medium" : "Large"}
+              {s === "R" ? "Regular/7″" : s === "M" ? "Medium/10″" : "Large/12″"}
             </button>
           ))}
         </div>
