@@ -174,11 +174,11 @@ const TrustpilotSection = () => {
 
       <div className="flex flex-col md:flex-row justify-center items-center gap-2 mb-10">
         <span className="font-bold text-lg text-black">Excellent</span>
-        <img
+        {/* <img
           src="https://upload.wikimedia.org/wikipedia/commons/0/09/Trustpilot_Stars_Logo.svg"
           alt="Trustpilot stars"
           className="h-6 ml-2"
-        />
+        /> */}
         <span className="text-gray-700 ml-2">
           4.5 out of 5 · 110,652 reviews on
         </span>

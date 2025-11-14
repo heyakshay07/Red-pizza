@@ -44,7 +44,7 @@ const App = () => {
       {/* ✅ Navbar ALWAYS VISIBLE */}
       <Navbar />
       
-      <FloatingOrderButton />
+      {/* <FloatingOrderButton /> */}
 
       {/* ✅ ROUTES */}
       <Routes>
@@ -93,7 +93,7 @@ const App = () => {
          <Route path="/cart" element={<Cart />} />
 
       </Routes>
-      <ParallaxSection />
+      {/* <ParallaxSection /> */}
     
    
       <Footer />

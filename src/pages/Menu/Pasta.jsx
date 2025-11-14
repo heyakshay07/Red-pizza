@@ -286,7 +286,7 @@
 
 
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 import QuickieModal from "../../components/QuickieModal";
 import FilterButtons from "../../components/FilterButtons"; // ✅ Shared FilterButtons
@@ -339,6 +339,11 @@ export default function Pasta() {
   const { handleAddToCart } = useContext(CartContext);
   const [filter, setFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState(null);
+
+   // ✅ Scroll to top when Quickies page loads
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   // ✅ Filter logic (reuseable)
   const filteredItems = pastaItems.filter((item) =>

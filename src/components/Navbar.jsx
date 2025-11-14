@@ -322,7 +322,175 @@
 // export default Navbar;
 
 
-import React, { useState, useEffect,  useContext  } from "react";
+// import React, { useState, useEffect,  useContext  } from "react";
+// import { Link, useLocation, useNavigate } from "react-router-dom";
+// import { ShoppingCart, Search, X } from "lucide-react";
+// import { FaUserCircle } from "react-icons/fa";
+// import logo from "../assets/navbar/logo.jpg";
+// import { CartContext } from "../context/CartContext";
+
+// const Navbar = () => {
+//   const [scrolled, setScrolled] = useState(false);
+//   const [searchOpen, setSearchOpen] = useState(false);
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const location = useLocation();
+//   const navigate = useNavigate();
+
+//   const isHomePage = location.pathname === "/";
+//  const { handleAddToCart, cart } = useContext(CartContext);
+
+//   useEffect(() => {
+//     if (!isHomePage) return;
+//     const onScroll = () => setScrolled(window.scrollY > 10);
+//     window.addEventListener("scroll", onScroll);
+//     return () => window.removeEventListener("scroll", onScroll);
+//   }, [isHomePage]);
+
+//   const navbarBackground = "bg-black";
+
+//   // ✅ UPDATED SEARCH HANDLER
+//   const handleSearch = (e) => {
+//     e.preventDefault();
+//     if (searchQuery.trim()) {
+//       navigate(`/pages/menupage?search=${encodeURIComponent(searchQuery)}`);
+//       setSearchQuery("");
+//       setSearchOpen(false);
+//     }
+//   };
+
+//    console.log('cart length',cart.length)
+//   return (
+//     <nav
+//       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBackground}`}
+//     >
+//       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+//         {/* ✅ Logo */}
+//         <Link to="/">
+//           <img src={logo} alt="Logo" className="h-12 w-12 cursor-pointer rounded-full" />
+//         </Link>
+
+//         {/* ✅ Desktop Menu */}
+//         <div className="hidden md:flex items-center space-x-6 text-white font-semibold text-sm tracking-wide md:mr-[40px] ">
+//           <Link to="/" className="hover:text-yellow-400">Home</Link>
+//           <Link to="/aboutus" className="hover:text-yellow-400">About Us</Link>
+//           <Link to="/menupage" className="hover:text-yellow-400">Menu</Link>
+//           <Link to="/gallery" className="hover:text-yellow-400">Gallery</Link>
+//           <Link to="/blog" className="hover:text-yellow-400">Blog</Link>
+//           <Link to="/contactus" className="hover:text-yellow-400">Contact Us</Link>
+//           <Link to="/newarrival" className="hover:text-yellow-400">New Arrival</Link>
+
+//           {/* ✅ Search box */}
+//           <form onSubmit={handleSearch} className="relative">
+//             {searchOpen ? (
+//               <input
+//                 type="text"
+//                 value={searchQuery}
+//                 onChange={(e) => setSearchQuery(e.target.value)}
+//                 onBlur={() => setSearchOpen(false)}
+//                 placeholder="Search..."
+//                 className="px-3 py-1 text-white rounded-md outline-none transition-all w-40 focus:w-56 bg-black/40"
+//                 autoFocus
+//               />
+//             ) : (
+//               <Search
+//                 className="cursor-pointer w-5 h-5 text-white hover:text-yellow-400"
+//                 onClick={() => setSearchOpen(true)}
+//               />
+//             )}
+//           </form>
+
+//           {/* ✅ Cart icon */}
+//           <Link to="/cart" className="relative">
+//             <ShoppingCart className="w-6 h-6 text-white hover:text-yellow-400" />
+//             <span className="absolute -top-2 -right-2 bg-red-600 text-xs text-white rounded-full px-1.5">
+//                    {cart.length}
+//             </span>
+//           </Link>
+
+//           {/* ✅ Sign In Button */}
+//           <Link to="/pages/signin">
+//             <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
+//               Sign in
+//             </button>
+//           </Link>
+
+//           {/* ✅ User Icon */}
+//           <FaUserCircle
+//             className="text-white text-2xl cursor-pointer hover:text-yellow-400"
+//             onClick={() => navigate("/pages/profile")}
+//           />
+//         </div>
+
+//         {/* ✅ Mobile menu button */}
+//         <button
+//           onClick={() => setMenuOpen(!menuOpen)}
+//           className="md:hidden text-white text-2xl focus:outline-none"
+//         >
+//           {menuOpen ? <X size={28} /> : "☰"}
+//         </button>
+//       </div>
+
+//       {/* ✅ Mobile Dropdown */}
+//       {menuOpen && (
+//         <div className="md:hidden bg-black/95 text-white flex flex-col items-center space-y-4 transition-all duration-300 py-4">
+//           <Link to="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Home</Link>
+//           <Link to="/aboutus" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">About Us</Link>
+//           <Link to="/menupage" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Menu</Link>
+//           <Link to="/gallery" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Gallery</Link>
+//           <Link to="/blog" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Blog</Link>
+//           <Link to="/contactus" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Contact Us</Link>
+//           <Link to="/newarrival" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">New Arrival</Link>
+
+//           {/* ✅ Mobile Search */}
+//           <form onSubmit={handleSearch} className="flex items-center space-x-2">
+//             <Search className="w-5 h-5 text-yellow-400" />
+//             <input
+//               type="text"
+//               value={searchQuery}
+//               onChange={(e) => setSearchQuery(e.target.value)}
+//               placeholder="Search..."
+//               className="px-3 py-1 rounded-md text-black"
+//             />
+//           </form>
+
+//           {/* ✅ Cart, Profile, Sign In */}
+//           <div className="flex items-center space-x-4 border-2 border-white">
+//             <Link to="/cart" onClick={() => setMenuOpen(false)} className="relative">
+//               <ShoppingCart className="w-6 h-6 text-white hover:text-yellow-400" />
+//               <span className="absolute -top-2 -right-2 bg-red-600 text-xs text-white rounded-full px-1.5">
+//                 {cart.length}
+//               </span>
+//             </Link>
+
+//             <FaUserCircle
+//               className="text-white text-2xl cursor-pointer hover:text-yellow-400"
+//               onClick={() => {
+//                 navigate("/pages/profile");
+//                 setMenuOpen(false);
+//               }}
+//             />
+
+//             <Link to="/order" onClick={() => setMenuOpen(false)}>
+//               <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
+//                 Sign in
+//               </button>
+//             </Link>
+//           </div>
+//         </div>
+//       )}
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+
+
+
+
+
+
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart, Search, X } from "lucide-react";
 import { FaUserCircle } from "react-icons/fa";
@@ -334,11 +502,12 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
-
   const isHomePage = location.pathname === "/";
- const { handleAddToCart, cart } = useContext(CartContext);
+
+  const { cart } = useContext(CartContext);
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -349,29 +518,33 @@ const Navbar = () => {
 
   const navbarBackground = "bg-black";
 
-  // ✅ UPDATED SEARCH HANDLER
+  // ⭐ FULL SEARCH FUNCTIONALITY ⭐
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/pages/menu/quickies?search=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery("");
-      setSearchOpen(false);
-    }
+
+    if (searchQuery.trim() === "") return;
+
+    // Navigate to menu page with query param
+    navigate(`/menupage?search=${encodeURIComponent(searchQuery)}`);
+
+    setSearchOpen(false);
+    setSearchQuery("");
+    setMenuOpen(false);
   };
 
-   console.log('cart length',cart.length)
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBackground}`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* ✅ Logo */}
+
+        {/* Logo */}
         <Link to="/">
-          <img src={logo} alt="Logo" className="h-12 w-auto cursor-pointer" />
+          <img src={logo} alt="Logo" className="h-12 w-12 cursor-pointer rounded-full" />
         </Link>
 
-        {/* ✅ Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-6 text-white font-semibold text-sm tracking-wide md:mr-[40px]">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-6 text-white font-semibold text-sm tracking-wide md:mr-[40px] ">
           <Link to="/" className="hover:text-yellow-400">Home</Link>
           <Link to="/aboutus" className="hover:text-yellow-400">About Us</Link>
           <Link to="/menupage" className="hover:text-yellow-400">Menu</Link>
@@ -380,7 +553,7 @@ const Navbar = () => {
           <Link to="/contactus" className="hover:text-yellow-400">Contact Us</Link>
           <Link to="/newarrival" className="hover:text-yellow-400">New Arrival</Link>
 
-          {/* ✅ Search box */}
+          {/* Desktop Search */}
           <form onSubmit={handleSearch} className="relative">
             {searchOpen ? (
               <input
@@ -389,7 +562,7 @@ const Navbar = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onBlur={() => setSearchOpen(false)}
                 placeholder="Search..."
-                className="px-3 py-1 text-white rounded-md outline-none transition-all w-40 focus:w-56 bg-black/40"
+                className="px-3 py-1 text-white rounded-md outline-none w-40 focus:w-56 transition-all bg-black/40"
                 autoFocus
               />
             ) : (
@@ -400,29 +573,29 @@ const Navbar = () => {
             )}
           </form>
 
-          {/* ✅ Cart icon */}
+          {/* Cart */}
           <Link to="/cart" className="relative">
             <ShoppingCart className="w-6 h-6 text-white hover:text-yellow-400" />
             <span className="absolute -top-2 -right-2 bg-red-600 text-xs text-white rounded-full px-1.5">
-                   {cart.length}
+              {cart.length}
             </span>
           </Link>
 
-          {/* ✅ Sign In Button */}
+          {/* Sign In */}
           <Link to="/pages/signin">
             <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
               Sign in
             </button>
           </Link>
 
-          {/* ✅ User Icon */}
+          {/* User */}
           <FaUserCircle
             className="text-white text-2xl cursor-pointer hover:text-yellow-400"
             onClick={() => navigate("/pages/profile")}
           />
         </div>
 
-        {/* ✅ Mobile menu button */}
+        {/* Mobile Hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white text-2xl focus:outline-none"
@@ -431,9 +604,10 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* ✅ Mobile Dropdown */}
+      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-black/95 text-white flex flex-col items-center space-y-4 transition-all duration-300 py-4">
+        <div className="md:hidden bg-black/95 text-white flex flex-col items-center space-y-4 py-4">
+
           <Link to="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Home</Link>
           <Link to="/aboutus" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">About Us</Link>
           <Link to="/menupage" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Menu</Link>
@@ -442,7 +616,7 @@ const Navbar = () => {
           <Link to="/contactus" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">Contact Us</Link>
           <Link to="/newarrival" onClick={() => setMenuOpen(false)} className="hover:text-yellow-400">New Arrival</Link>
 
-          {/* ✅ Mobile Search */}
+          {/* Mobile Search */}
           <form onSubmit={handleSearch} className="flex items-center space-x-2">
             <Search className="w-5 h-5 text-yellow-400" />
             <input
@@ -454,8 +628,8 @@ const Navbar = () => {
             />
           </form>
 
-          {/* ✅ Cart, Profile, Sign In */}
-          <div className="flex items-center space-x-4 border-2 border-white">
+          {/* Cart + Profile */}
+          <div className="flex items-center space-x-4">
             <Link to="/cart" onClick={() => setMenuOpen(false)} className="relative">
               <ShoppingCart className="w-6 h-6 text-white hover:text-yellow-400" />
               <span className="absolute -top-2 -right-2 bg-red-600 text-xs text-white rounded-full px-1.5">
@@ -470,12 +644,6 @@ const Navbar = () => {
                 setMenuOpen(false);
               }}
             />
-
-            <Link to="/order" onClick={() => setMenuOpen(false)}>
-              <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
-                Sign in
-              </button>
-            </Link>
           </div>
         </div>
       )}
@@ -484,9 +652,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-
-
-

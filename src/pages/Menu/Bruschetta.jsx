@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import QuickieModal from "../../components/QuickieModal";
@@ -47,6 +47,11 @@ export default function Bruschetta() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("search")?.toLowerCase() || "";
+
+   // ✅ Scroll to top when Quickies page loads
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   // ✅ Filter logic (search + type)
   const filteredItems = bruschettaItems.filter((item) =>
