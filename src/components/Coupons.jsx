@@ -3,12 +3,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react"; // import icons
 
 const Coupens = () => {
   const images = [
-    "/src/assets/offerse/of1.jpg",
-    "/src/assets/offerse/of2.jpg",
-    "/src/assets/offerse/of3.jpg",
-    "/src/assets/offerse/of4.jpg",
-    "/src/assets/offerse/of5.jpg",
-    "/src/assets/offerse/of6.jpg",
+    "/src/assets/offerse/of1.webp",
+    "/src/assets/offerse/of2.webp",
+    "/src/assets/offerse/of3.webp",
+    "/src/assets/offerse/of4.webp",
+    "/src/assets/offerse/of5.webp",
+    "/src/assets/offerse/of6.webp",
   ];
 
   const [index, setIndex] = useState(0);
@@ -49,7 +49,7 @@ const Coupens = () => {
 
   return (
     <section className="relative max-w-7xl mx-auto px-4 py-12 bg-[#f7f1e9] rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4">Coupons & Offers</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">Coupons & Offers</h2>
 
       <div className="relative">
         {/* Left Arrow */}

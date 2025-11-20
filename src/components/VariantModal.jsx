@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // // import React, { useEffect, useState } from "react";
 
 // // export default function VariantModal({ item = null, onClose, onConfirm }) {
@@ -179,6 +180,8 @@
 // }
 
 
+
+
 import React, { useEffect, useState } from "react";
 
 export default function VariantModal({ item = null, onClose, onConfirm }) {
@@ -283,4 +286,8 @@ export default function VariantModal({ item = null, onClose, onConfirm }) {
       </div>
     </div>
   );
+
 }
+
+
+

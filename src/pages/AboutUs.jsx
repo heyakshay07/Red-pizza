@@ -3,6 +3,10 @@
 
 // import img from "../../src/assets/navbar/pizza1.jpg";
 // import mainImg from "../../src/assets/about/img1.jpg"; // main hero image
+
+
+// import drinksImg from "../../src/assets/about/img2.jpg"; // drink glasses
+
 // import steakImg from "../assets/img/box3.png"; // steak image
 
 // const AboutUs = () => {
@@ -25,8 +29,13 @@
 //       {/* Hero Image */}
 //       <div className="relative w-full h-[250px] md:h-[400px] mb-10">
 //         <img src={img} alt="pizza" className="w-full h-full object-cover" />
+
 //         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
 //           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center">
+
+//         <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
+//           <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+
 //             About Us
 //           </h1>
 //         </div>
@@ -34,9 +43,15 @@
 
 //       {/* Food Experience Section */}
 //       <div className="container mx-auto px-4 md:px-10 flex flex-col md:flex-row items-center mb-20 gap-6 md:gap-8">
+
 //         {/* Images */}
 //         <motion.div
 //           className="flex flex-row gap-4 md:gap-8 w-full md:w-1/2 justify-center md:justify-start"
+
+//         {/* Images side by side */}
+//         <motion.div
+//           className="flex flex-row gap-6 md:gap-8 w-full md:w-1/2"
+
 //           initial={{ opacity: 0, x: -50 }}
 //           whileInView={{ opacity: 1, x: 0 }}
 //           transition={{ duration: 1 }}
@@ -44,32 +59,60 @@
 //           <img
 //             src={mainImg}
 //             alt="cheesy food"
+
 //             className="rounded-2xl shadow-lg object-cover w-full md:w-2/3 h-[300px] sm:h-[400px] md:h-[500px]"
+
+//             className="rounded-2xl shadow-lg object-cover w-3/3 md:w-2/3 h-[700px]"
+//           />
+//           <img
+//             src={drinksImg}
+//             alt="drinks"
+//             className="rounded-2xl shadow-lg object-cover md:w-1/3 h-[300px] mt-70 mx-auto"
+
 //           />
 //         </motion.div>
 
 //         {/* Text */}
 //         <motion.div
+
 //           className="md:w-1/2 flex flex-col justify-start mt-6 md:mt-0"
+
+//           className="md:w-1/2 flex flex-col justify-left mt-6 md:mt-0"
+
 //           initial={{ opacity: 0, x: 50 }}
 //           whileInView={{ opacity: 1, x: 0 }}
 //           transition={{ duration: 0.5 }}
 //         >
+
 //           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-snug text-center md:text-left">
 //             it’s not just food, <br /> it’s an experience.
 //           </h2>
 //           <p className="mb-4 text-gray-700 text-base sm:text-lg leading-relaxed text-center md:text-left">
+
+//           <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-snug text-center">
+//             it’s not just food, <br /> it’s an experience.
+//           </h2>
+//           <p className="mb-2 text-gray-700 text-lg leading-relaxed text-center m-10">
+
 //             At <span className="font-semibold">Red-Pizza</span>, we’re all about
 //             pushing the boundaries of comfort food. Imagine the gooey, melty
 //             goodness of cheese combined with the savory satisfaction of burgers
 //             and pizzas – that’s the heart of what we do.
 //           </p>
+
 //           <p className="mb-4 text-gray-700 text-base sm:text-lg leading-relaxed text-center md:text-left">
+
+//           <p className="mb-4 text-gray-700 text-lg leading-relaxed text-center m-10">
+
 //             Quality is our top priority. We use only the freshest ingredients,
 //             and craft each dish with care and creativity. Our team is dedicated
 //             to serving meals as fun and unique as our cafe.
 //           </p>
+
 //           <p className="text-gray-800 font-semibold text-base sm:text-lg leading-relaxed text-center md:text-left">
+
+//           <p className="text-gray-800 font-semibold text-lg leading-relaxed text-center m-10">
+
 //             Ready to taste the best of both worlds? Come on over and let your
 //             cravings go wild.
 //           </p>
@@ -340,7 +383,7 @@ const AboutUs = () => {
           className={`flex md:hidden justify-center gap-3 mt-6 ${enterBase} ${
             mounted ? visibleState : hiddenState
           }`}
-          style={{ transitionDelay: "520ms" }}
+          style={{ transitionDelay: "360ms" }}
         >
           <img
             src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=80"
@@ -353,12 +396,19 @@ const AboutUs = () => {
             className="rounded-2xl w-1/2 h-[140px] sm:h-[160px] object-cover transform transition-transform duration-500 ease-out hover:scale-105"
           />
         </div>
+
+    
       </section>
     </div>
   );
 };
+<<<<<<< HEAD
 
 export default AboutUs;
 
 
 
+=======
+
+export default AboutUs;
+>>>>>>> 7717614aa4f6c3e662ec35a2e26a302cd158021e

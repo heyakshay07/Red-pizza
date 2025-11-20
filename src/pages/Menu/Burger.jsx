@@ -117,7 +117,7 @@
 
 
 // pages/Burgers.js
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import QuickieModal from "../../components/QuickieModal";
 import { CartContext } from "../../context/CartContext";
 import FilterButtons from "../../components/FilterButtons"; // ✅ Shared FilterButtons
@@ -150,6 +150,11 @@ export default function Burgers() {
   const [filter, setFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState(null);
   const { handleAddToCart } = useContext(CartContext);
+
+   // ✅ Scroll to top when Quickies page loads
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   const filteredItems = burgerItems.filter((item) =>
     filter === "all" ? true : item.type === filter

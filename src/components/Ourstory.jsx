@@ -14,7 +14,7 @@ Our product is standardised across the Nation, supported by a robust supply chai
 Everywhere we go, we hear ‘Your pizza is the tastiest pizza around, why aren’t you open in my location’. The answer is simple, every outlet opened is a promise to our customer, and not one we take lightly.</p>
       </div>
       <div className=''>
-     <div className='w-full h-auto object-cover pb-4 pt-5'><img src={story} alt="Our story" className='rounded-2xl md:h-[408px] ' /></div>
+     <div className='w-full h-auto object-cover pb-4 pt-5'><img src={story} alt="Our story" className='rounded-2xl md:h-[408px] mr-10' /></div>
     </div>
     </div>
 

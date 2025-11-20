@@ -188,7 +188,7 @@
 
 
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import FilterButtons from "../../components/FilterButtons";
 import { CartContext } from "../../context/CartContext";
 
@@ -208,6 +208,11 @@ export default function Dessert() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [filter, setFilter] = useState("all");
+
+   // ✅ Scroll to top when Quickies page loads
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   const filteredItems = dessertItems.filter((item) => filter === "all" || item.type === filter);
 

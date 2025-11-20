@@ -272,7 +272,7 @@
 
 
 // pages/Beverages.js
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 
 import coldCoffee from "../../assets/beverages/cold-coffee.jpeg";
@@ -299,6 +299,11 @@ export default function Beverages() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [size, setSize] = useState("S");
   const [quantity, setQuantity] = useState(1);
+
+   // ✅ Scroll to top when Quickies page loads
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   const addToCart = () => {
     const price = size === "M" ? selectedItem.priceMedium || selectedItem.priceSmall : selectedItem.priceSmall;

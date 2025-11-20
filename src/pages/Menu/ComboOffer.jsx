@@ -154,7 +154,7 @@
 
 
 // pages/ComboOffer.js
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import QuickieModal from "../../components/QuickieModal";
 import { CartContext } from "../../context/CartContext";
 import FilterButtons from "../../components/FilterButtons";
@@ -218,6 +218,11 @@ export default function ComboOffer() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [filter, setFilter] = useState("all");
+
+   // ✅ Scroll to top when Quickies page loads
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   // Filter combo items
   const filteredItems =

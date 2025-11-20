@@ -44,7 +44,7 @@ const App = () => {
       {/* ✅ Navbar ALWAYS VISIBLE */}
       <Navbar />
       
-      <FloatingOrderButton />
+      {/* <FloatingOrderButton /> */}
 
       {/* ✅ ROUTES */}
       <Routes>
@@ -67,13 +67,14 @@ const App = () => {
         />
 
         {/* ✅ OTHER PAGES — ONLY SHOW PAGE CONTENT */}
-        <Route path="/aboutus" element={<AboutUs />} />
+        {/* <Route path="/aboutus" element={<AboutUs />} /> */}
         <Route path="/menupage" element={<MenuPage />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/newarrival" element={<NewArrival />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/RedPizzaAdminPanel" element={<RedPizzaAdminPanel/>} />
 
         {/*Menu*/}
         <Route path="/pages/menu/quickies" element={<Quickies />} />
@@ -90,10 +91,10 @@ const App = () => {
 
         <Route path="/pages/signin" element={<SignIn />} />
         
-         <Route path="/cart" element={<Cart />} />
+         {/* <Route path="/cart" element={<Cart />} /> */}
 
       </Routes>
-      <ParallaxSection />
+      {/* <ParallaxSection /> */}
     
    
       <Footer />

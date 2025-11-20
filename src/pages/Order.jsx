@@ -1,19 +1,43 @@
-
-
-
 // src/pages/Order.jsx
 import React, { useMemo, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
+
+import img from "../assets/about/or1.webp"
+
 export default function RedPizzaOrderPage() {
   const SAMPLE_MENU = [
-    { id: 1, name: "Margherita Classic", desc: "Tomato sauce, fresh mozzarella, basil", price: 249, veg: true },
-    { id: 2, name: "Spicy Pepperoni", desc: "Pepperoni, mozzarella, chili oil", price: 299, veg: false },
-    { id: 3, name: "Truffle Alfredo", desc: "Creamy sauce, mushrooms, truffle oil", price: 349, veg: true },
-    { id: 4, name: "BBQ Chicken", desc: "BBQ glaze, roasted chicken, onions", price: 329, veg: false },
+    {
+      id: 1,
+      name: "Margherita Classic",
+      desc: "Tomato sauce, fresh mozzarella, basil",
+      price: 249,
+      veg: true,
+    },
+    {
+      id: 2,
+      name: "Spicy Pepperoni",
+      desc: "Pepperoni, mozzarella, chili oil",
+      price: 299,
+      veg: false,
+    },
+    {
+      id: 3,
+      name: "Truffle Alfredo",
+      desc: "Creamy sauce, mushrooms, truffle oil",
+      price: 349,
+      veg: true,
+    },
+    {
+      id: 4,
+      name: "BBQ Chicken",
+      desc: "BBQ glaze, roasted chicken, onions",
+      price: 329,
+      veg: false,
+    },
   ];
-    const location = useLocation();
- const { order } = location.state || {};  
+  const location = useLocation();
+  const { order } = location.state || {};
 
   console.log("Received order:", order);
 
@@ -21,7 +45,12 @@ export default function RedPizzaOrderPage() {
   const [selected, setSelected] = useState(SAMPLE_MENU[0]);
   const [notes, setNotes] = useState("");
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", address: "", payment: "cod" });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    payment: "cod",
+  });
 
   // Example effect (kept but no undefined variable)
   useEffect(() => {
@@ -31,15 +60,24 @@ export default function RedPizzaOrderPage() {
   const addToCart = (item) => {
     setCart((c) => {
       const found = c.find((x) => x.id === item.id);
-      if (found) return c.map((x) => (x.id === item.id ? { ...x, qty: x.qty + 1 } : x));
+      if (found)
+        return c.map((x) => (x.id === item.id ? { ...x, qty: x.qty + 1 } : x));
       return [...c, { ...item, qty: 1 }];
     });
   };
 
   const removeFromCart = (id) => setCart((c) => c.filter((x) => x.id !== id));
-  const changeQty = (id, delta) => setCart((c) => c.map((x) => (x.id === id ? { ...x, qty: Math.max(1, x.qty + delta) } : x)));
+  const changeQty = (id, delta) =>
+    setCart((c) =>
+      c.map((x) =>
+        x.id === id ? { ...x, qty: Math.max(1, x.qty + delta) } : x
+      )
+    );
 
-  const subtotal = useMemo(() => cart.reduce((s, i) => s + i.price * i.qty, 0), [cart]);
+  const subtotal = useMemo(
+    () => cart.reduce((s, i) => s + i.price * i.qty, 0),
+    [cart]
+  );
   const delivery = subtotal > 499 || subtotal === 0 ? 0 : 49;
   const tax = +(subtotal * 0.05).toFixed(2);
   const total = subtotal + delivery + tax;
@@ -65,10 +103,20 @@ export default function RedPizzaOrderPage() {
           <div className="flex flex-col md:flex-row">
             {/* Visual & Selected Pizza */}
             <div className="w-full md:w-1/2 p-6 bg-gradient-to-br from-red-600 to-red-400 text-white flex flex-col gap-4">
-              <h2 className="text-3xl font-extrabold tracking-tight">Red Pizza — Order Online</h2>
-              <p className="opacity-90">Hot. Fresh. Fast. Choose your pizza and customize — we animate every step ❤️‍🔥</p>
+              <div className="mt-4 flex flex-col items-center justify-center gap-3">
+  <img
+    src={img}
+    alt={selected.name}
+    className="w-56 h-100 rounded-2xl object-cover shadow-lg"
+  />
+  {/* <h3 className="text-lg font-semibold text-white">{selected.name}</h3> */}
+</div>
 
-              <div className="mt-4 flex items-start gap-4">
+
+              {/* <h2 className="text-3xl font-extrabold tracking-tight">Red Pizza — Order Online</h2>
+              <p className="opacity-90">Hot. Fresh. Fast. Choose your pizza and customize — we animate every step ❤️‍🔥</p> */}
+
+              {/* <div className="mt-4 flex items-start gap-4">
                 <div className="w-36 h-36 rounded-xl bg-white/20 flex items-center justify-center shadow-inner">
                   <div className="w-28 h-28 rounded-full bg-gradient-to-b from-yellow-200 to-yellow-400 flex items-center justify-center text-red-700 font-bold text-sm">
                     {selected.name.split(" ")[0]}
@@ -87,9 +135,9 @@ export default function RedPizzaOrderPage() {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label className="text-sm">Special notes</label>
                 <textarea
                   value={notes}
@@ -97,7 +145,7 @@ export default function RedPizzaOrderPage() {
                   placeholder="Extra cheese, no onion, etc..."
                   className="w-full mt-2 p-3 rounded-lg text-black/80"
                 />
-              </div>
+              </div> */}
             </div>
 
             {/* Menu list */}
@@ -150,13 +198,20 @@ export default function RedPizzaOrderPage() {
         <aside className="bg-white rounded-2xl shadow-lg p-4 sticky top-6 h-fit">
           <div className="flex items-center justify-between">
             <h4 className="font-bold text-lg">Your Order</h4>
-            <div className="text-sm opacity-80">{cart.reduce((a, b) => a + (b.qty || 0), 0)} items</div>
+            <div className="text-sm opacity-80">
+              {cart.reduce((a, b) => a + (b.qty || 0), 0)} items
+            </div>
           </div>
 
           <div className="mt-4 space-y-3">
             <AnimatePresence>
               {cart.length === 0 && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-sm opacity-80">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-sm opacity-80"
+                >
                   Your cart is empty — add something delicious 🍕
                 </motion.div>
               )}
@@ -171,7 +226,7 @@ export default function RedPizzaOrderPage() {
                   className="flex items-center justify-between gap-3 p-3 rounded-lg border"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 rounded-md bg-yellow-200 flex items-center justify-center font-semibold text-sm">{it.name.split(' ')[0]}</div>
+                    {/* <div className="w-12 h-12 rounded-md bg-yellow-200 flex items-center justify-center font-semibold text-sm">{it.name.split(' ')[0]}</div> */}
                     <div>
                       <div className="font-medium">{it.name}</div>
                       <div className="text-sm opacity-80">₹{it.price} each</div>
@@ -179,10 +234,25 @@ export default function RedPizzaOrderPage() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <button onClick={() => changeQty(it.id, -1)} className="px-2 py-1 rounded border">-</button>
+                    <button
+                      onClick={() => changeQty(it.id, -1)}
+                      className="px-2 py-1 rounded border"
+                    >
+                      -
+                    </button>
                     <div className="w-6 text-center">{it.qty}</div>
-                    <button onClick={() => changeQty(it.id, 1)} className="px-2 py-1 rounded border">+</button>
-                    <button onClick={() => removeFromCart(it.id)} className="ml-2 text-sm text-red-600">Remove</button>
+                    <button
+                      onClick={() => changeQty(it.id, 1)}
+                      className="px-2 py-1 rounded border"
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={() => removeFromCart(it.id)}
+                      className="ml-2 text-sm text-red-600"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </motion.div>
               ))}
@@ -190,25 +260,49 @@ export default function RedPizzaOrderPage() {
           </div>
 
           <div className="mt-4 border-t pt-4 space-y-2">
-            <div className="flex justify-between text-sm opacity-80"><span>Subtotal</span><span>₹{subtotal}</span></div>
-            <div className="flex justify-between text-sm opacity-80"><span>Delivery</span><span>{delivery === 0 ? 'Free' : `₹${delivery}`}</span></div>
-            <div className="flex justify-between text-sm opacity-80"><span>Tax</span><span>₹{tax}</span></div>
-            <div className="flex justify-between text-lg font-bold"><span>Total</span><span>₹{total.toFixed(2)}</span></div>
+            <div className="flex justify-between text-sm opacity-80">
+              <span>Subtotal</span>
+              <span>₹{subtotal}</span>
+            </div>
+            <div className="flex justify-between text-sm opacity-80">
+              <span>Delivery</span>
+              <span>{delivery === 0 ? "Free" : `₹${delivery}`}</span>
+            </div>
+            <div className="flex justify-between text-sm opacity-80">
+              <span>Tax</span>
+              <span>₹{tax}</span>
+            </div>
+            <div className="flex justify-between text-lg font-bold">
+              <span>Total</span>
+              <span>₹{total.toFixed(2)}</span>
+            </div>
           </div>
 
           <div className="mt-4">
             <button
               disabled={cart.length === 0}
               onClick={() => setCheckoutOpen(true)}
-              className={`w-full py-3 rounded-lg font-bold ${cart.length === 0 ? 'bg-gray-300 text-gray-700' : 'bg-red-600 text-white'} transition`}
+              className={`w-full py-3 rounded-lg font-bold ${
+                cart.length === 0
+                  ? "bg-gray-300 text-gray-700"
+                  : "bg-red-600 text-white"
+              } transition`}
             >
-              Checkout
+              Confirm Order
             </button>
           </div>
 
           <div className="mt-3 text-xs opacity-80 flex justify-between">
-            <button onClick={() => setCart(SAMPLE_MENU.map((m) => ({ ...m, qty: 1 })))}>Add 1 of every pizza</button>
-            <button onClick={() => setCart([])} className="text-red-600">Clear</button>
+            <button
+              onClick={() =>
+                setCart(SAMPLE_MENU.map((m) => ({ ...m, qty: 1 })))
+              }
+            >
+              Add 1 of every pizza
+            </button>
+            <button onClick={() => setCart([])} className="text-red-600">
+              Clear
+            </button>
           </div>
         </aside>
       </div>
@@ -216,30 +310,67 @@ export default function RedPizzaOrderPage() {
       {/* Checkout modal */}
       <AnimatePresence>
         {checkoutOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-end md:items-center justify-center px-4">
-            <motion.div initial={{ y: 30 }} animate={{ y: 0 }} exit={{ y: 30 }} className="w-full md:w-96 bg-white rounded-2xl shadow-2xl p-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end md:items-center justify-center px-4"
+          >
+            <motion.div
+              initial={{ y: 30 }}
+              animate={{ y: 0 }}
+              exit={{ y: 30 }}
+              className="w-full md:w-96 bg-white rounded-2xl shadow-2xl p-6"
+            >
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">Checkout</h3>
-                <button onClick={() => setCheckoutOpen(false)} className="text-sm opacity-80">Close</button>
+                <button
+                  onClick={() => setCheckoutOpen(false)}
+                  className="text-sm opacity-80"
+                >
+                  Close
+                </button>
               </div>
 
               <form onSubmit={placeOrder} className="mt-4 space-y-3">
                 <div>
                   <label className="text-sm">Name</label>
-                  <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full mt-1 p-2 border rounded-lg" />
+                  <input
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="w-full mt-1 p-2 border rounded-lg"
+                  />
                 </div>
                 <div>
                   <label className="text-sm">Phone</label>
-                  <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full mt-1 p-2 border rounded-lg" />
+                  <input
+                    value={form.phone}
+                    onChange={(e) =>
+                      setForm({ ...form, phone: e.target.value })
+                    }
+                    className="w-full mt-1 p-2 border rounded-lg"
+                  />
                 </div>
                 <div>
                   <label className="text-sm">Address</label>
-                  <textarea value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} className="w-full mt-1 p-2 border rounded-lg" />
+                  <textarea
+                    value={form.address}
+                    onChange={(e) =>
+                      setForm({ ...form, address: e.target.value })
+                    }
+                    className="w-full mt-1 p-2 border rounded-lg"
+                  />
                 </div>
 
                 <div>
                   <label className="text-sm">Payment</label>
-                  <select value={form.payment} onChange={(e) => setForm({ ...form, payment: e.target.value })} className="w-full mt-1 p-2 border rounded-lg">
+                  <select
+                    value={form.payment}
+                    onChange={(e) =>
+                      setForm({ ...form, payment: e.target.value })
+                    }
+                    className="w-full mt-1 p-2 border rounded-lg"
+                  >
                     <option value="cod">Cash on Delivery</option>
                     <option value="up">UPI</option>
                     <option value="card">Card</option>
@@ -248,11 +379,18 @@ export default function RedPizzaOrderPage() {
 
                 <div className="flex items-center gap-2 text-sm">
                   <input type="checkbox" id="save" />
-                  <label htmlFor="save" className="opacity-80">Save details for faster checkout</label>
+                  <label htmlFor="save" className="opacity-80">
+                    Save details for faster checkout
+                  </label>
                 </div>
 
                 <div className="mt-2">
-                  <button type="submit" className="w-full py-3 rounded-lg bg-red-600 text-white font-bold">Place Order ₹{total.toFixed(2)}</button>
+                  <button
+                    type="submit"
+                    className="w-full py-3 rounded-lg bg-red-600 text-white font-bold"
+                  >
+                    Place Order ₹{total.toFixed(2)}
+                  </button>
                 </div>
               </form>
             </motion.div>
@@ -260,7 +398,9 @@ export default function RedPizzaOrderPage() {
         )}
       </AnimatePresence>
 
-      <footer className="max-w-6xl mx-auto mt-8 text-center text-sm opacity-80">© Red Pizza — Quality you can taste</footer>
+      <footer className="max-w-6xl mx-auto mt-8 text-center text-sm opacity-80">
+        © Red Pizza — Quality you can taste
+      </footer>
     </div>
   );
 }

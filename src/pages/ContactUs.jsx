@@ -66,7 +66,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="w-full mb-20 px-4 md:px-8">
+    <div className="w-full mb-20 ">
       {/* Hero Section */}
       <div className="relative w-full h-[220px] md:h-[380px] mb-8 rounded-lg overflow-hidden shadow-lg">
         <img src={img} alt="pizza" className="w-full h-full object-cover" />

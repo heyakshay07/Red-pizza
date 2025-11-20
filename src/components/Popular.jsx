@@ -3,11 +3,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import QuickieModal from "./QuickieModal"; // import modal
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import coup1 from "../assets/coupens/coup1.jpg";
-import coup2 from "../assets/coupens/coup2.jpg";
-import coup3 from "../assets/coupens/coup3.jpg";
-import coup4 from "../assets/coupens/coup4.jpg";
-import coup5 from "../assets/coupens/coup5.jpg";
+import coup1 from "../assets/coupens/coup1.webp";
+import coup2 from "../assets/coupens/coup2.webp";
+import coup3 from "../assets/coupens/coup3.webp";
+import coup4 from "../assets/coupens/coup4.webp";
+import coup5 from "../assets/coupens/coup5.webp";
 
 const Popular = () => {
   const cards = [
@@ -69,8 +69,8 @@ const Popular = () => {
   // };
 
   return (
-    <div className="relative max-w-7xl mx-auto px-4 py-12 bg-[#f7f1e9] rounded-lg">
-      <h2 className="text-2xl font-semibold mb-6 text-center sm:text-left">Popular Pizzas</h2>
+    <div className="relative max-w-7xl mx-auto px-4 pt-0.5 pb-0.5 bg-[#f7f1e9] rounded-lg ">
+      <h2 className="text-2xl font-semibold mb-6 text-center ">Popular Pizzas</h2>
 
       <div
         className="overflow-hidden"

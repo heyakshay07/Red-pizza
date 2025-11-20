@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 import QuickieModal from "../../components/QuickieModal";
 import FilterButtons from "../../components/FilterButtons"; // ✅ Shared filter
@@ -15,9 +15,45 @@ import veg6 from "../../assets/pizza/v6.jpeg";
 import veg7 from "../../assets/pizza/v7.jpeg";
 import veg8 from "../../assets/pizza/v8.jpeg";
 import veg9 from "../../assets/pizza/v9.jpeg";
-import veg from "../../assets/pizza/vegPizza.jpeg";
-import nonvegPizza from "../../assets/pizza/nonvegPizza.jpeg";
-import jain from "../../assets/pizza/jain.jpeg";
+import veg10 from "../../assets/pizza/v10.webp";
+import veg11 from "../../assets/pizza/v11.webp";
+import veg12 from "../../assets/pizza/v12.webp";
+import veg13 from "../../assets/pizza/v13.webp";
+import veg14 from "../../assets/pizza/v14.webp";
+import veg15 from "../../assets/pizza/v15.webp";
+import veg16 from "../../assets/pizza/v16.webp";
+import veg17 from "../../assets/pizza/v17.webp";
+import veg18 from "../../assets/pizza/v18.webp";
+import veg19 from "../../assets/pizza/v19.webp";
+import veg20 from "../../assets/pizza/v20.webp";
+import veg21 from "../../assets/pizza/v21.webp";
+import veg22 from "../../assets/pizza/v22.webp";
+import veg23 from "../../assets/pizza/v23.webp";
+import veg24 from "../../assets/pizza/v24.webp";
+import veg25 from "../../assets/pizza/v25.webp";
+import veg26 from "../../assets/pizza/v26.webp";
+import veg27 from "../../assets/pizza/v27.webp";
+import veg28 from "../../assets/pizza/v28.webp";
+import veg29 from "../../assets/pizza/v29.webp";
+import veg30 from "../../assets/pizza/v30.webp";
+import veg31 from "../../assets/pizza/v31.webp";
+import veg32 from "../../assets/pizza/v32.webp";
+import veg33 from "../../assets/pizza/v33.webp";
+import veg34 from "../../assets/pizza/v34.webp";
+import veg35 from "../../assets/pizza/v35.webp";
+import veg36 from "../../assets/pizza/v36.webp";
+import veg37 from "../../assets/pizza/v37.webp";
+import veg38 from "../../assets/pizza/v38.webp";
+import veg39 from "../../assets/pizza/v39.webp";
+import veg40 from "../../assets/pizza/v40.webp";
+import veg41 from "../../assets/pizza/v41.webp";
+import veg42 from "../../assets/pizza/v42.webp";
+import veg43 from "../../assets/pizza/v43.webp";
+import veg44 from "../../assets/pizza/v44.webp";
+import veg45 from "../../assets/pizza/v45.webp";
+import veg46 from "../../assets/pizza/v46.webp";
+import veg47 from "../../assets/pizza/v47.webp";
+import veg48 from "../../assets/pizza/v48.webp";
 
 // ✅ Pizza Data (same as before)
 const pizzaCategories = {
@@ -35,15 +71,15 @@ const pizzaCategories = {
     { name: "Spicy Veg", desc: "Fried Onion & Tomato With Special Spices", price: 179, type: "veg", img: veg9 },
   ],
   "Veg V3": [
-  { name: "Paneer Tikka", desc: "Paneer, Capsicum & Red Pepper", price: 209, medium: 419, large: 549, type: "veg" },
-  { name: "Veg Hawaiian", desc: "Pineapple, Jalapeno, American Corn & Capsicum", price: 209, medium: 419, large: 549, type: "veg" },
-  { name: "Veggie Senorita", desc: "Jalapeno, American Corn, Tomato, Black Olives", price: 209, medium: 419, large: 549, type: "veg" },
-  { name: "Jain Pizza", desc: "Mushroom, American Corn, Black Olives & Extra Cheese", price: 209, medium: 419, large: 549, type: "jain" },
-  { name: "Classic Supreme", desc: "Paneer Schezwan, Capsicum, Baby Corn, Mushroom, Onion & Jalapeno", price: 209, medium: 419, large: 549, type: "veg" },
-  { name: "Paneer & Onion", desc: "Fresh Paneer with Onion", price: 209, medium: 419, large: 549, type: "veg" },
-  { name: "Spicy Paneer", desc: "Paneer, Onion, Capsicum & Green Chili cooked in Chinese style", price: 209, medium: 419, large: 549, type: "veg" },
-  { name: "Golden Delight", desc: "Corn, Onion, Capsicum & Tomato", price: 209, medium: 419, large: 549, type: "veg" },
-  { name: "Red Passion", desc: "Onion, Red Pepper, Jalapeno & Green Chili", price: 209, medium: 419, large: 549, type: "veg" },
+  { name: "Paneer Tikka", desc: "Paneer, Capsicum & Red Pepper", price: 209, medium: 419, large: 549, type: "veg", img: veg10 },
+  { name: "Veg Hawaiian", desc: "Pineapple, Jalapeno, American Corn & Capsicum", price: 209, medium: 419, large: 549, type: "veg", img: veg11 },
+  { name: "Veggie Senorita", desc: "Jalapeno, American Corn, Tomato, Black Olives", price: 209, medium: 419, large: 549, type: "veg", img: veg12 },
+  { name: "Jain Pizza", desc: "Mushroom, American Corn, Black Olives & Extra Cheese", price: 209, medium: 419, large: 549, type: "jain", img: veg13 },
+  { name: "Classic Supreme", desc: "Paneer Schezwan, Capsicum, Baby Corn, Mushroom, Onion & Jalapeno", price: 209, medium: 419, large: 549, type: "veg", img: veg14 },
+  { name: "Paneer & Onion", desc: "Fresh Paneer with Onion", price: 209, medium: 419, large: 549, type: "veg", img: veg15 },
+  { name: "Spicy Paneer", desc: "Paneer, Onion, Capsicum & Green Chili cooked in Chinese style", price: 209, medium: 419, large: 549, type: "veg", img: veg16 },
+  { name: "Golden Delight", desc: "Corn, Onion, Capsicum & Tomato", price: 209, medium: 419, large: 549, type: "veg" ,img: veg17},
+  { name: "Red Passion", desc: "Onion, Red Pepper, Jalapeno & Green Chili", price: 209, medium: 419, large: 549, type: "veg",img: veg18 },
 ],
   "Veg V4": [
   {
@@ -52,7 +88,8 @@ const pizzaCategories = {
     price: 255,
     medium: 475,
     large: 625,
-    type: "veg"
+    type: "veg",
+    img: veg19
   },
   {
     name: "Veg Extravaganza",
@@ -60,7 +97,8 @@ const pizzaCategories = {
     price: 255,
     medium: 475,
     large: 625,
-    type: "veg"
+    type: "veg",
+    img: veg20
   }
 ],
 
@@ -71,7 +109,8 @@ const pizzaCategories = {
     price: 169,
     medium: 365,
     large: 499,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg21
   },
   {
     name: "Roast Chicken",
@@ -79,7 +118,8 @@ const pizzaCategories = {
     price: 169,
     medium: 365,
     large: 499,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg22
   },
   {
     name: "Half Roast Half Spicy",
@@ -87,7 +127,8 @@ const pizzaCategories = {
     price: 169,
     medium: 365,
     large: 499,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg23
   },
   {
     name: "Plain Chicken",
@@ -95,7 +136,8 @@ const pizzaCategories = {
     price: 169,
     medium: 365,
     large: 499,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg24
   }
 ],
 
@@ -106,7 +148,8 @@ const pizzaCategories = {
     price: 265,       // Regular 7"
     medium: 520,      // Medium 10"
     large: 625,       // Large 12"
-    type: "nonveg"
+    type: "nonveg",
+    img: veg25
   },
   {
     name: "Chicken Salami",
@@ -114,7 +157,8 @@ const pizzaCategories = {
     price: 265,
     medium: 520,
     large: 625,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg26
   },
   {
     name: "Chicken Schezwan",
@@ -122,7 +166,8 @@ const pizzaCategories = {
     price: 265,
     medium: 520,
     large: 625,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg27
   },
   {
     name: "Chicken Sausage",
@@ -130,7 +175,8 @@ const pizzaCategories = {
     price: 265,
     medium: 520,
     large: 625,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg28
   }
 ],
 
@@ -141,7 +187,8 @@ const pizzaCategories = {
     price: 299,      // Regular 7"
     medium: 549,     // Medium 10"
     large: 689,      // Large 12"
-    type: "nonveg"
+    type: "nonveg",
+    img: veg29
   },
   {
     name: "Grocy Italian",
@@ -149,7 +196,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg30
   },
   {
     name: "Mix Chicken",
@@ -157,7 +205,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg31
   },
   {
     name: "RED Supreme",
@@ -165,7 +214,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg32
   },
   {
     name: "RED Hawaiian",
@@ -173,7 +223,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg33
   },
   {
     name: "Chilly Chicken",
@@ -181,7 +232,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg34
   },
   {
     name: "Golden Chicken",
@@ -189,7 +241,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg35
   },
   {
     name: "RED Feast",
@@ -197,7 +250,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg36
   },
   {
     name: "RED Dopiaza",
@@ -205,7 +259,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg37
   },
   {
     name: "Butter Chicken",
@@ -213,7 +268,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg38
   },
   {
     name: "RED Lazania",
@@ -221,7 +277,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg39
   },
   {
     name: "American Delight",
@@ -229,7 +286,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg40
   },
   {
     name: "RED LE",
@@ -237,7 +295,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg41
   },
   {
     name: "RED Mexican",
@@ -245,7 +304,8 @@ const pizzaCategories = {
     price: 299,
     medium: 549,
     large: 689,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg42
   }
 ],
 
@@ -256,7 +316,8 @@ const pizzaCategories = {
     price: 345,      // Regular 7"
     medium: 629,     // Medium 10"
     large: 859,      // Large 12"
-    type: "nonveg"
+    type: "nonveg",
+    img: veg43
   },
   {
     name: "RED Indigo",
@@ -264,7 +325,8 @@ const pizzaCategories = {
     price: 345,
     medium: 629,
     large: 859,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg44
   },
   {
     name: "RED Hochste",
@@ -272,7 +334,8 @@ const pizzaCategories = {
     price: 345,
     medium: 629,
     large: 859,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg45
   },
   {
     name: "RED Preferita",
@@ -280,7 +343,8 @@ const pizzaCategories = {
     price: 345,
     medium: 629,
     large: 859,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg46
   },
   {
     name: "RED Extravaganza",
@@ -288,12 +352,13 @@ const pizzaCategories = {
     price: 345,
     medium: 629,
     large: 859,
-    type: "nonveg"
+    type: "nonveg",
+    img: veg47
   }
 ],
 
   "Jain": [
-    { name: "Jain Classic", desc: "Pure Jain pizza base", price: 159, type: "jain" },
+    { name: "Jain Classic", desc: "Pure Jain pizza base", price: 159, type: "jain", img: veg48 },
   ],
 };
 
@@ -302,6 +367,11 @@ export default function PizzaMenu() {
   const [filter, setFilter] = useState("all");
   const [activeTab, setActiveTab] = useState("All");
   const [selectedItem, setSelectedItem] = useState(null);
+
+   // ✅ Scroll to top when Quickies page loads
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   // ✅ Filter pizzas based on type (using shared filter)
   const filteredCategories = Object.entries(pizzaCategories).filter(([key, pizzas]) => {
